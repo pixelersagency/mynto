@@ -1,12 +1,33 @@
-# mynto
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/mynto-logo-dark.svg">
+    <img src="docs/assets/mynto-logo-light.svg" alt="mynto" width="220">
+  </picture>
+</p>
+
+<p align="center">
+  <strong>L'outil d'audit de site pour agences, en marque blanche et auto-hébergé.</strong><br>
+  Audit sur 8 axes, rapport à ta marque, lien de suivi, API et serveur MCP.
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img alt="Licence AGPL-3.0" src="https://img.shields.io/badge/licence-AGPL--3.0-7A2E2E"></a>
+  <a href="https://github.com/pixelersagency/mynto/releases"><img alt="Version" src="https://img.shields.io/github/v/tag/pixelersagency/mynto?label=version&color=2A1414"></a>
+  <a href="https://mynto.fr"><img alt="Site" src="https://img.shields.io/badge/site-mynto.fr-E9B48A"></a>
+</p>
 
 Outil d'audit de sites web auto-hébergé, pensé pour les agences. Tu lances un audit, mynto analyse le site sur 8 axes, rédige un rapport à ta marque, te donne un lien de suivi pour le prospect et te prévient quand il l'ouvre.
 
 Licence [AGPL-3.0](LICENSE). Français d'abord, [English below](#english).
 
-![Fiche audit dans le tableau de bord (audit de example.com)](docs/screenshots/audit.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/dashboard-dark.png">
+  <img src="docs/screenshots/dashboard-light.png" alt="Tableau de bord : liste des audits et fiche d'un site avec son score, le radar des axes et les problèmes prioritaires (données fictives)">
+</picture>
 
-![Rapport web, modèle Standard (données fictives)](packages/templates/builtin/standard/preview.png)
+<p align="center"><img src="docs/screenshots/rapport-demo.gif" alt="Démo : défilement d'un rapport au modèle Minimaliste, du score au plan d'action (données fictives)" width="720"></p>
+
+![Les trois modèles de rapport fournis : Minimaliste, Bento et Style Mynto (données fictives)](docs/screenshots/templates.png)
 
 ## Sommaire
 
@@ -33,7 +54,7 @@ Licence [AGPL-3.0](LICENSE). Français d'abord, [English below](#english).
 - **Rédaction par IA** (optionnelle) : Claude par défaut, Gemini ou Mistral. Sans clé, le rapport garde une synthèse déterministe, sans aucun appel externe.
 - **Tableau de bord** : accueil « à faire », liste des audits, fiche audit, historique des scores, Analytics, recherche et commandes (⌘K).
 - **Liens de suivi** `/r/<jeton>` : tu sais si le prospect a ouvert le rapport, rien de plus (pas de cookie, IP jamais conservée en clair).
-- **Modèles de rapport** : trois modèles fournis (Standard, Compact, Commercial), les tiens en Liquid, polices servies localement, rapport web et PDF identiques. Voir [docs/templates/README.md](docs/templates/README.md).
+- **Modèles de rapport** : trois modèles fournis (Minimaliste, Bento, Style Mynto), les tiens en Liquid, polices servies localement, rapport web et PDF identiques. Voir [docs/templates/README.md](docs/templates/README.md).
 - **Envoi par email** via ton propre serveur SMTP.
 - **API REST v1** et **serveur MCP** (Claude Desktop, Claude Code, tout client MCP). Voir [docs/mcp.md](docs/mcp.md).
 - **Webhooks sortants signés** (n8n, Make, Zapier, CRM) : 10 événements, signature HMAC, nouvelles tentatives. Voir [docs/webhooks.md](docs/webhooks.md).
