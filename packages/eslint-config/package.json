@@ -20,7 +20,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "globals": "^15.12.0",
-    "typescript-eslint": "^8.15.0"
+    "typescript-eslint": "^8.72.1"
   },
   "peerDependencies": {
     "eslint": "^9.0.0"
