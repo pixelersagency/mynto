@@ -1,0 +1,12 @@
+# Secrets : gitleaks sur les fichiers indexés (config .gitleaks.toml).
+if command -v gitleaks >/dev/null 2>&1; then
+  gitleaks git --pre-commit --staged --redact --no-banner --log-level warn --config .gitleaks.toml || {
+    echo "gitleaks a trouvé un secret probable : commit refusé (voir ci-dessus)." >&2
+    exit 1
+  }
+else
+  echo "gitleaks absent : scan des secrets sauté (brew install gitleaks). La CI le lance quand même." >&2
+fi
+
+# Format et lint des fichiers indexés.
+pnpm exec lint-staged

@@ -1,0 +1,19 @@
+<section class="mr-section" aria-labelledby="mr-axes-title">
+  <h2 id="mr-axes-title" class="mr-h2"><span class="mr-kicker">Scores par axe</span></h2>
+  <ul class="mr-bars">
+    {% for a in axes %}
+    <li class="mr-bars__row{% unless a.evaluated %} is-off{% endunless %}">
+      <span class="mr-bars__name">{{ a.label }}<span class="mr-visually-hidden"> : </span><span class="mr-bars__count">{% if a.evaluated %}{% if a.findings_count == 0 %}Aucun problème{% else %}{{ a.findings_count }} {{ a.findings_count | plural: 'problème', 'problèmes' }}{% endif %}{% else %}Non évalué pour cet audit{% endif %}</span></span>
+      <span class="mr-bars__track" aria-hidden="true">{% if a.evaluated %}<span class="mr-bars__fill mr-bars__fill--{{ a.score.band }}" style="width: {{ a.score.value }}%"></span>{% endif %}</span>
+      <span class="mr-bars__value">{% if a.evaluated %}<strong>{{ a.score.value }}</strong><span class="mr-visually-hidden"> sur 100</span> · <span class="mr-band mr-band--{{ a.score.band }}">{{ a.score.band_label | downcase }}</span>{% else %}Non évalué{% endif %}</span>
+    </li>
+    {% endfor %}
+    {% unless show_ai %}
+    <li class="mr-bars__row{% unless ai.evaluated and ai.score.value != nil %} is-off{% endunless %}">
+      <span class="mr-bars__name">Préparation IA<span class="mr-visually-hidden"> : </span><span class="mr-bars__count">{% if ai.evaluated and ai.score.value != nil %}Niveau {{ ai.level }} sur {{ ai.max_level }}, {% if ai.included_in_global_score %}dans le score global{% else %}hors score global{% endif %}{% elsif ai.failed %}Site injoignable pendant le test{% else %}Non évalué pour cet audit{% endif %}</span></span>
+      <span class="mr-bars__track" aria-hidden="true">{% if ai.evaluated and ai.score.value != nil %}<span class="mr-bars__fill mr-bars__fill--{{ ai.score.band }}" style="width: {{ ai.score.value }}%"></span>{% endif %}</span>
+      <span class="mr-bars__value">{% if ai.evaluated and ai.score.value != nil %}<strong>{{ ai.score.value }}</strong><span class="mr-visually-hidden"> sur 100</span> · <span class="mr-band mr-band--{{ ai.score.band }}">{{ ai.score.band_label | downcase }}</span>{% elsif ai.failed %}Non mesuré{% else %}Non évalué{% endif %}</span>
+    </li>
+    {% endunless %}
+  </ul>
+</section>

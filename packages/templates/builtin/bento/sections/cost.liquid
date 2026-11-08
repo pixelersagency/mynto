@@ -1,0 +1,8 @@
+{% if cost %}
+<section class="mr-section mr-cost" aria-labelledby="mr-cost-title">
+  <h2 id="mr-cost-title" class="mr-kicker">Le chiffrage indicatif</h2>
+  {% if cost.redesign_reasons.size > 0 %}<ul class="mr-bullets">{% for r in cost.redesign_reasons %}<li>{{ r }}</li>{% endfor %}</ul>{% endif %}
+  {% if settings.offer != '' %}<p class="mr-cost__offer">{{ settings.offer }}</p>{% endif %}
+  <p class="mr-note">{{ cost.disclaimer }}</p>
+</section>
+{% endif %}

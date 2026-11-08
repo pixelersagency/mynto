@@ -1,0 +1,214 @@
+/* PDF (A4, 16 mm margins set by the engine). Choice: the cover stays dark
+   burgundy (one page, the brand moment), the body switches to a light
+   palette to save ink and stay readable on paper. Peach is too light on
+   white: the accent becomes burgundy, or the agency colour darkened for
+   white (`--mr-brand-text`) when « Couleur de l’agence » is chosen. */
+& {
+  --y-deep: #ffffff;
+  --y-bg: #ffffff;
+  --y-glow: #faf6f1;
+  --y-pill: #f3ece4;
+  --y-text: #2a1414;
+  --y-body: #4a3a33;
+  --y-muted: #6e5a50;
+  --y-line: rgba(42, 20, 20, 0.14);
+  --y-tag-bg: #2a1414;
+  --y-tag-fg: #ede6da;
+  --y-cta-bg: #faf6f1;
+  --y-code: #faf6f1;
+  --y-gap: 11mm;
+  padding: 0;
+  font-size: 9.5pt;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.mr-page {
+  --y-accent: #7a2e2e;
+  padding: 0;
+  border-radius: 0;
+}
+.mr-page[data-accent='brand'] {
+  --y-accent: var(--mr-brand-text);
+}
+.mr-page > * {
+  max-width: none;
+}
+.mr-actions,
+.mr-tracking {
+  display: none;
+}
+.mr-header {
+  margin-top: 0;
+}
+.mr-hero {
+  padding-top: 10mm;
+}
+.mr-title {
+  font-size: 28pt;
+}
+.mr-hero__card {
+  margin-top: 8mm;
+  padding: 6mm;
+}
+.mr-score__num {
+  font-size: 54pt;
+}
+.mr-radar__svg {
+  max-width: 82mm;
+}
+.mr-radar__grid {
+  stroke: rgba(42, 20, 20, 0.14);
+}
+.mr-brief__text {
+  font-size: 13pt;
+}
+.mr-h2__title {
+  font-size: 20pt;
+}
+.mr-figures dd {
+  font-size: 18pt;
+}
+.mr-diag {
+  font-size: 10.5pt;
+}
+.mr-tile__value {
+  font-size: 22pt;
+}
+.mr-ai__num {
+  font-size: 34pt;
+}
+.mr-ladder__bar {
+  border-color: rgba(42, 20, 20, 0.3);
+}
+.mr-finding {
+  padding: 6mm 0;
+  grid-template-columns: 34mm minmax(0, 1fr);
+}
+.mr-finding__title,
+.mr-plan__title {
+  font-size: 13pt;
+}
+.mr-code pre {
+  max-height: none;
+  overflow: visible;
+  color: #2a1414;
+  border-color: var(--y-line);
+  font-size: 8pt;
+}
+.mr-cta {
+  padding: 9mm;
+  border: 0.3mm solid var(--y-line);
+}
+.mr-cta__title {
+  font-size: 22pt;
+}
+.mr-cta .mr-btn--primary {
+  min-height: 0;
+  padding: 2mm 4mm;
+}
+.mr-group__summary::before {
+  display: none;
+}
+.mr-footer {
+  padding-top: 10mm;
+  font-size: 8pt;
+}
+.mr-hero__card,
+.mr-figures,
+.mr-plan__step,
+.mr-tile,
+.mr-ai__card,
+.mr-fix,
+.mr-test,
+.mr-finding,
+.mr-cta,
+.mr-privacy {
+  break-inside: avoid;
+}
+.mr-h2,
+.mr-h3,
+.mr-h4,
+.mr-group__summary {
+  break-after: avoid;
+}
+a[href^='http']::after {
+  content: ' (' attr(href) ')';
+  font-size: 7.5pt;
+  color: var(--y-muted);
+  overflow-wrap: anywhere;
+}
+a.mr-brand__name::after,
+.mr-facts a::after,
+.mr-plan__links a::after {
+  content: none;
+}
+
+/* Cover page: dark, inside the page margins */
+.mr-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 250mm;
+  padding: 12mm;
+  border-radius: 3mm;
+  background: #2a1414;
+  color: #ede6da;
+  break-after: page;
+}
+.mr-cover__brand {
+  font-size: 12pt;
+  font-weight: 500;
+}
+.mr-cover__logo {
+  height: 12mm;
+  width: auto;
+  max-width: 70mm;
+  object-fit: contain;
+}
+.mr-cover__kicker {
+  display: inline-block;
+  padding: 1.2mm 2.4mm;
+  border-radius: 1mm;
+  background: #ede6da;
+  color: #2a1414;
+  font-size: 8pt;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.mr-cover__title {
+  margin-top: 6mm;
+  font-family: var(--mr-font-heading);
+  font-size: 40pt;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  overflow-wrap: anywhere;
+}
+.mr-cover__url {
+  margin-top: 3mm;
+  font-family: var(--y-mono);
+  font-size: 10pt;
+  color: #9e8c80;
+  overflow-wrap: anywhere;
+}
+.mr-cover__score {
+  margin-top: 16mm;
+}
+.mr-cover__num {
+  font-family: var(--mr-font-heading);
+  font-size: 72pt;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #e9b48a;
+}
+.mr-cover__of {
+  color: #9e8c80;
+}
+.mr-cover__date {
+  font-family: var(--y-mono);
+  color: #9e8c80;
+}
+
+.mr-page[data-accent='brand'] .mr-cover__num {
+  color: var(--mr-brand-on-dark);
+}

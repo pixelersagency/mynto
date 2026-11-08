@@ -1,0 +1,5 @@
+{% if mode == 'web' %}<div class="mr-actions">
+  {% if agency.contact_url %}<a class="mr-btn mr-btn--primary" href="{{ agency.contact_url }}">{{ texts.cta_label }}</a>{% endif %}
+  <a class="mr-btn" href="{{ links.pdf_url }}" download>Télécharger le PDF</a>
+  <button type="button" class="mr-btn" data-mynto-action="copy" data-mynto-value="{{ links.share_url }}" data-mynto-done="Lien copié"><span data-mynto-label>Copier le lien</span></button>
+</div>{% endif %}

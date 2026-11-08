@@ -1,0 +1,22 @@
+# Never sent to the Docker build: secrets, local state, build outputs.
+.git
+.github
+.husky
+.env
+.env.*
+!.env.example
+*.env
+.local
+**/node_modules
+**/.next
+**/.turbo
+**/dist
+**/coverage
+**/*.tsbuildinfo
+**/test-results
+**/playwright-report
+docs
+templates
+*.md
+!apps/**/README.md
+docker-compose*.yml

@@ -1,0 +1,14 @@
+{% if cost %}
+<section class="mr-section" aria-labelledby="mr-cost-title">
+  <h2 id="mr-cost-title" class="mr-h2"><span class="mr-kicker">Le chiffrage indicatif</span></h2>
+  <dl class="mr-figures">
+    <div><dt>Temps de correction</dt><dd>{{ cost.days_label }}</dd></div>
+    <div><dt>Budget</dt><dd>{{ cost.amount_label }}<span class="mr-visually-hidden">, </span><span class="mr-figures__sub">{{ cost.daily_rate_label }}</span></dd></div>
+    <div><dt>Corrections chiffrées</dt><dd>{{ cost.items_count }}</dd></div>
+  </dl>
+  {% if cost.verdict_label %}<p class="mr-cost__verdict">{{ cost.verdict_label }}</p>{% endif %}
+  {% if cost.redesign_reasons.size > 0 %}<ul class="mr-bullets">{% for r in cost.redesign_reasons %}<li>{{ r }}</li>{% endfor %}</ul>{% endif %}
+  {% if settings.offer != '' %}<p class="mr-cost__offer">{{ settings.offer }}</p>{% endif %}
+  <p class="mr-note">{{ cost.disclaimer }}</p>
+</section>
+{% endif %}

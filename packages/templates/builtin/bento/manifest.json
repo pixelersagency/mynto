@@ -1,0 +1,168 @@
+{
+  "id": "bento",
+  "name": "Bento",
+  "description": "Des tuiles sobres en nuances de gris, lisibles d’un coup d’œil. La couleur de l’agence reste discrète.",
+  "version": "2.0.0",
+  "contract": {
+    "name": "report-data",
+    "version": 1
+  },
+  "author": "Mynto",
+  "settings": [
+    {
+      "key": "sections",
+      "type": "sections",
+      "label": "Sections",
+      "help": "Active, désactive et réordonne les sections sous l’ouverture (score, radar, en bref).",
+      "default": [
+        {
+          "id": "cost",
+          "enabled": true
+        },
+        {
+          "id": "priorities",
+          "enabled": true
+        },
+        {
+          "id": "summary",
+          "enabled": true
+        },
+        {
+          "id": "axes",
+          "enabled": true
+        },
+        {
+          "id": "ai",
+          "enabled": true
+        },
+        {
+          "id": "issues",
+          "enabled": true
+        },
+        {
+          "id": "passed",
+          "enabled": false
+        },
+        {
+          "id": "cta",
+          "enabled": true
+        }
+      ]
+    },
+    {
+      "key": "intro",
+      "type": "textarea",
+      "label": "Introduction",
+      "help": "Affichée sous le titre. Laisse vide pour ne rien afficher.",
+      "max": 400,
+      "default": ""
+    },
+    {
+      "key": "cta_title",
+      "type": "text",
+      "label": "Titre de l’appel à l’action",
+      "max": 80,
+      "default": "On s’en occupe ?"
+    },
+    {
+      "key": "cta_text",
+      "type": "textarea",
+      "label": "Texte de l’appel à l’action",
+      "help": "Vide : une phrase avec le nom de ton agence.",
+      "max": 300,
+      "default": ""
+    },
+    {
+      "key": "cta_label",
+      "type": "text",
+      "label": "Bouton de l’appel à l’action",
+      "help": "Mène au lien de contact ou de rendez-vous de Réglages > Agence.",
+      "max": 40,
+      "default": "Réserver un appel de 20 minutes"
+    },
+    {
+      "key": "offer",
+      "type": "textarea",
+      "label": "Ce que tu proposes",
+      "help": "Une ou deux phrases sous le chiffrage, par exemple ton forfait.",
+      "max": 300,
+      "default": ""
+    },
+    {
+      "key": "footer_text",
+      "type": "textarea",
+      "label": "Pied de page",
+      "help": "Vide : le pied de page de la marque.",
+      "max": 500,
+      "default": ""
+    },
+    {
+      "key": "open_issues",
+      "type": "select",
+      "label": "Problèmes par axe",
+      "options": [
+        {
+          "value": "all",
+          "label": "Tous dépliés"
+        },
+        {
+          "value": "p0",
+          "label": "Dépliés s’il y a un problème critique"
+        },
+        {
+          "value": "none",
+          "label": "Tous repliés"
+        }
+      ],
+      "default": "all"
+    },
+    {
+      "key": "show_code",
+      "type": "boolean",
+      "label": "Afficher les extraits de code",
+      "default": true
+    },
+    {
+      "key": "show_hero",
+      "type": "boolean",
+      "label": "Afficher la capture du site",
+      "default": false
+    },
+    {
+      "key": "density",
+      "type": "select",
+      "label": "Densité",
+      "options": [
+        {
+          "value": "airy",
+          "label": "Aérée"
+        },
+        {
+          "value": "compact",
+          "label": "Compacte"
+        }
+      ],
+      "default": "airy"
+    },
+    {
+      "key": "pdf_cover",
+      "type": "boolean",
+      "label": "Page de couverture dans le PDF",
+      "default": true
+    },
+    {
+      "key": "heading_font",
+      "type": "font",
+      "label": "Police des titres",
+      "help": "Par défaut : Manrope, la police du modèle. Choisis « Celle de Réglages, Polices » pour ta police de marque.",
+      "default": "manrope"
+    },
+    {
+      "key": "body_font",
+      "type": "font",
+      "label": "Police du texte",
+      "help": "Par défaut : celle de Réglages > Polices.",
+      "default": "inherit"
+    }
+  ]
+}

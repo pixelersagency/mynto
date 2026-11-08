@@ -1,0 +1,11 @@
+{% if passed.size > 0 %}
+<section class="mr-section mr-passed-section" aria-labelledby="mr-passed-title">
+  <h2 id="mr-passed-title" class="mr-h2"><span class="mr-tag">Ce qui va bien</span></h2>
+  <details class="mr-group"{% if mode == 'print' %} open{% endif %}>
+    <summary class="mr-group__summary"><span class="mr-group__name">{{ passed.size }} {{ passed.size | plural: 'contrôle réussi', 'contrôles réussis' }}</span> <span class="mr-group__meta">Afficher la liste</span></summary>
+    <ul class="mr-passed">
+      {% for p in passed %}<li><span class="mr-passed__icon" aria-hidden="true"></span><span>{{ p.label }} <span class="mr-passed__axis">{{ p.axis_label }}</span></span></li>{% endfor %}
+    </ul>
+  </details>
+</section>
+{% endif %}

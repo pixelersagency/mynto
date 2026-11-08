@@ -1,0 +1,37 @@
+# Développement local : copie ce fichier en docker-compose.override.yml
+# (lu automatiquement par docker compose, ignoré par git) pour lancer
+# seulement Postgres et Redis dans Docker et le code avec `pnpm dev`.
+#
+#   cp docker-compose.override.example.yml docker-compose.override.yml
+#   docker compose up -d postgres redis
+#   pnpm dev
+#
+# Dans .env.local (lu par pnpm dev) :
+#   DATABASE_URL=postgres://mynto:<POSTGRES_PASSWORD>@127.0.0.1:5432/mynto
+#   REDIS_URL=redis://127.0.0.1:6379
+#   MEDIA_DIR=./.local/media
+#
+# Les ports ne sont publiés que sur 127.0.0.1.
+
+services:
+  postgres:
+    ports:
+      - '127.0.0.1:5432:5432'
+    networks:
+      - dev
+
+  redis:
+    ports:
+      - '127.0.0.1:6379:6379'
+    networks:
+      - dev
+
+  # Pour tester les images de production localement, sans HTTPS :
+  # web:
+  #   environment:
+  #     PUBLIC_URL: http://localhost:3000
+
+networks:
+  # Le réseau « internal » de docker-compose.yml interdit la publication de
+  # ports : en dev, Postgres et Redis rejoignent aussi ce réseau ordinaire.
+  dev: {}

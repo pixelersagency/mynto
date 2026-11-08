@@ -1,0 +1,7 @@
+<dl class="mr-facts">
+  <div><dt>Site</dt><dd><a href="{{ audit.url }}">{{ audit.url }}</a></dd></div>
+  {% if audit.sector %}<div><dt>Secteur</dt><dd>{{ audit.sector | capitalize }}</dd></div>{% endif %}
+  {% if audit.stack %}<div><dt>Technologie</dt><dd>{{ audit.stack }}</dd></div>{% endif %}
+  {% if audit.pages_analyzed %}<div><dt>Pages analysées</dt><dd>{{ audit.pages_analyzed }}</dd></div>{% endif %}
+</dl>
+{% if settings.show_hero and audit.hero_image_url %}<figure class="mr-shot"><img src="{{ audit.hero_image_url }}" alt="Premier écran de {{ audit.host }} au moment de l’audit" loading="lazy" decoding="async"></figure>{% endif %}

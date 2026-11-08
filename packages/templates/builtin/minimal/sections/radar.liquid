@@ -1,0 +1,9 @@
+<figure class="mr-radar">
+  <svg class="mr-radar__svg" viewBox="0 0 360 360" width="360" height="360" aria-hidden="true" focusable="false">
+    {% for lvl in (1..4) %}{% assign ring = lvl | times: 25 %}<polygon class="mr-radar__grid" points="{{ ring | radar_ring: axes.size, 118, 180 }}"></polygon>{% endfor %}
+    {% for a in axes %}<line class="mr-radar__grid" x1="180" y1="180" x2="{{ 100 | radar_x: forloop.index0, axes.size, 118, 180 }}" y2="{{ 100 | radar_y: forloop.index0, axes.size, 118, 180 }}"></line>{% endfor %}
+    <polygon class="mr-radar__shape" points="{{ axes | radar_points: 118, 180 }}"></polygon>
+    {% for a in axes %}<text class="mr-radar__label" x="{{ 117 | radar_x: forloop.index0, axes.size, 118, 180 }}" y="{{ 117 | radar_y: forloop.index0, axes.size, 118, 180 }}" text-anchor="{{ forloop.index0 | radar_anchor: axes.size }}" dominant-baseline="middle">{{ a.short }} <tspan class="mr-radar__value{% unless a.evaluated %} is-off{% endunless %}">{% if a.evaluated %}{{ a.score.value }}{% else %}–{% endif %}</tspan></text>{% endfor %}
+  </svg>
+  <figcaption class="mr-visually-hidden">Radar des scores par axe : {% for a in axes %}{{ a.label }}, {% if a.evaluated %}{{ a.score.value }} sur 100{% else %}non évalué{% endif %}{% if forloop.last %}.{% else %} ; {% endif %}{% endfor %}</figcaption>
+</figure>

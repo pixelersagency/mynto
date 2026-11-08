@@ -1,0 +1,172 @@
+/* PDF (A4, 16 mm margins set by the engine). White page, no frame: only the
+   light paper blocks keep a tint. Sections are rendered open in print mode. */
+& {
+  background: #ffffff;
+  padding: 0;
+  font-size: 10pt;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  --m-gap: 11mm;
+}
+.mr-page {
+  max-width: none;
+  padding: 0;
+}
+.mr-actions,
+.mr-tracking {
+  display: none;
+}
+.mr-hero__site {
+  margin-top: 10mm;
+}
+.mr-title {
+  font-size: 28pt;
+}
+.mr-hero__grid {
+  margin-top: 6mm;
+  grid-template-columns: 1fr 1fr;
+}
+.mr-score__num {
+  font-size: 72pt;
+}
+.mr-radar__svg {
+  max-width: 78mm;
+}
+.mr-hero__impact,
+.mr-plan__reason,
+.mr-cost__verdict,
+.mr-hero__cost {
+  font-size: 10pt;
+}
+.mr-hero__bar {
+  margin-top: 5mm;
+  padding: 3mm 4mm;
+}
+.mr-h2__title {
+  font-size: 18pt;
+}
+.mr-figures dd {
+  font-size: 20pt;
+}
+.mr-diag {
+  font-size: 12pt;
+}
+.mr-ai__num {
+  font-size: 40pt;
+}
+.mr-finding {
+  padding: 5mm 6mm;
+}
+.mr-finding__title {
+  font-size: 14pt;
+}
+.mr-finding__body {
+  font-size: 9.5pt;
+}
+.mr-finding__body > div {
+  grid-template-columns: 34mm 1fr;
+}
+.mr-code pre {
+  max-height: none;
+  overflow: visible;
+  font-size: 8pt;
+}
+.mr-cta {
+  padding: 7mm;
+}
+.mr-cta__title {
+  font-size: 18pt;
+}
+.mr-group__summary::before {
+  display: none;
+}
+.mr-footer {
+  margin-top: 12mm;
+  font-size: 8pt;
+}
+.mr-hero__grid,
+.mr-hero__bar,
+.mr-figures,
+.mr-plan__step,
+.mr-bars__row,
+.mr-fix,
+.mr-test,
+.mr-finding,
+.mr-cta,
+.mr-privacy {
+  break-inside: avoid;
+}
+.mr-h2,
+.mr-h3,
+.mr-h4,
+.mr-group__summary {
+  break-after: avoid;
+}
+a[href^='http']::after {
+  content: ' (' attr(href) ')';
+  font-size: 7.5pt;
+  color: var(--m-muted);
+  overflow-wrap: anywhere;
+}
+a.mr-brand__name::after,
+.mr-facts a::after,
+.mr-plan__links a::after {
+  content: none;
+}
+.mr-btn--primary {
+  min-height: 0;
+  padding: 2mm 4mm;
+}
+
+/* Cover page */
+.mr-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 250mm;
+  break-after: page;
+}
+.mr-cover__brand {
+  font-size: 12pt;
+  font-weight: 600;
+}
+.mr-cover__logo {
+  height: 12mm;
+  width: auto;
+  max-width: 70mm;
+  object-fit: contain;
+}
+.mr-cover__kicker {
+  font-size: 9pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--m-muted);
+}
+.mr-cover__title {
+  margin-top: 4mm;
+  font-family: var(--mr-font-heading);
+  font-size: 40pt;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+.mr-cover__url {
+  margin-top: 3mm;
+  color: var(--m-muted);
+  overflow-wrap: anywhere;
+}
+.mr-cover__score {
+  margin-top: 16mm;
+}
+.mr-cover__num {
+  font-family: var(--mr-font-heading);
+  font-size: 72pt;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.mr-cover__of {
+  color: var(--m-muted);
+}
+.mr-cover__date {
+  color: var(--m-muted);
+}

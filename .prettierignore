@@ -1,0 +1,35 @@
+node_modules/
+dist/
+.next/
+.turbo/
+coverage/
+build/
+out/
+pnpm-lock.yaml
+*.min.js
+*.min.css
+
+# Claude Code et agents (géré séparément)
+.claude/
+.agents/
+.mcp.json
+CLAUDE.md
+CLAUDE.local.md
+
+# Outils externes
+.kiro/
+.trae/
+
+# Docs et README (style préservé)
+README.md
+docs/
+skills-lock.json
+
+# Env (jamais formatés)
+.env*
+!.env.example
+
+# Fichiers générés ou textes officiels
+THIRD_PARTY_NOTICES.md
+CODE_OF_CONDUCT.md
+LICENSE

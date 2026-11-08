@@ -1,0 +1,9 @@
+{% if agency.contact_url %}
+<section class="mr-section mr-cta" aria-labelledby="mr-cta-title">
+  <div class="mr-cta__text">
+    <h2 id="mr-cta-title" class="mr-cta__title">{{ texts.cta_title }}</h2>
+    {% if texts.cta_text %}<p>{{ texts.cta_text }}</p>{% endif %}
+  </div>
+  <a class="mr-btn mr-btn--primary mr-btn--lg" href="{{ agency.contact_url }}">{{ texts.cta_label }}</a>
+</section>
+{% endif %}

@@ -1,0 +1,41 @@
+{
+  "name": "@mynto/templates",
+  "version": "0.1.0",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "description": "Report template engine (Liquid, sandboxed), report-data contract v1, built-in templates and the template CLI",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "bundle": "tsx scripts/cli.ts bundle",
+    "template": "tsx scripts/cli.ts",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@mynto/shared": "workspace:^",
+    "fflate": "^0.8.2",
+    "htmlparser2": "^8.0.2",
+    "liquidjs": "^10.30.1",
+    "sanitize-html": "^2.17.0",
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.25.2"
+  },
+  "devDependencies": {
+    "@mynto/eslint-config": "workspace:*",
+    "@mynto/tsconfig": "workspace:*",
+    "@types/node": "^22.9.0",
+    "@types/sanitize-html": "^2.16.0",
+    "axe-core": "^4.11.3",
+    "playwright": "^1.59.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.5"
+  }
+}

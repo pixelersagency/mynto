@@ -1,0 +1,25 @@
+<section class="mr-hero" aria-labelledby="mr-title">
+  <p class="mr-hero__site">{{ audit.host }}</p>
+  <h1 id="mr-title" class="mr-title">{% include 'sections/headline' %}</h1>
+  {% if texts.intro %}<p class="mr-intro">{{ texts.intro }}</p>{% endif %}
+  <div class="mr-glow mr-hero__card">
+    <div class="mr-score">
+      <p class="mr-score__label">Score global</p>
+      {% if score.value != nil %}<p class="mr-score__num"><span class="mr-visually-hidden">Score global : </span>{{ score.value }}<span class="mr-score__of"><span aria-hidden="true">/100</span><span class="mr-visually-hidden"> sur 100</span></span></p>{% else %}<p class="mr-score__num mr-score__num--off"><span aria-hidden="true">–</span><span class="mr-visually-hidden">Score global non évalué</span></p>{% endif %}
+      <p class="mr-score__meta">{% if score.value != nil %}<span class="mr-dot" aria-hidden="true"></span>{% endif %}{% if score.value != nil %}<span class="mr-band mr-band--{{ score.band }}">{{ score.band_label }}</span> · {% include 'sections/oneliner' %}{% else %}Score global non évalué.{% endif %}</p>
+      {% if score.partial and score.value != nil %}<p class="mr-note">Calculé sur {{ score.evaluated_axes }} axes sur {{ score.total_axes }}.</p>{% endif %}
+      <p class="mr-score__lines">{% if cost %}Corriger l’essentiel · {{ cost.days_label }}<br>{% endif %}Préparation IA · {% if ai.evaluated and ai.score.value != nil %}{{ ai.score.value }}/100{% elsif ai.failed %}non mesurée{% else %}non évaluée{% endif %}</p>
+    </div>
+    {% include 'sections/radar' %}
+  </div>
+</section>
+{% if summary.impact or mode == 'web' %}
+<section class="mr-section mr-brief" aria-labelledby="mr-brief-title">
+  <h2 id="mr-brief-title" class="mr-tag">En bref</h2>
+  {% if summary.impact %}<p class="mr-brief__text">{{ summary.impact }}</p>{% endif %}
+  {% include 'sections/actions' %}
+  {% include 'sections/facts' %}
+</section>
+{% else %}
+<div class="mr-section">{% include 'sections/facts' %}</div>
+{% endif %}

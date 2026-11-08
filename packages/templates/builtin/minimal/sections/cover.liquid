@@ -1,0 +1,12 @@
+{% if mode == 'print' and settings.pdf_cover %}
+<section class="mr-cover" aria-label="Couverture">
+  <p class="mr-cover__brand">{% if agency.logo_url %}<img class="mr-cover__logo" src="{{ agency.logo_url }}" alt="{{ agency.name }}">{% else %}{{ agency.name }}{% endif %}</p>
+  <div class="mr-cover__body">
+    <p class="mr-cover__kicker">Audit web</p>
+    <p class="mr-cover__title">{{ audit.name }}</p>
+    <p class="mr-cover__url">{{ audit.url }}</p>
+    {% if score.value != nil %}<p class="mr-cover__score"><span class="mr-cover__num">{{ score.value }}</span> <span class="mr-cover__of">/100 · {{ score.band_label }}</span></p>{% endif %}
+  </div>
+  <p class="mr-cover__date">{{ audit.created_label }}</p>
+</section>
+{% endif %}

@@ -1,0 +1,19 @@
+# gitleaks : règles par défaut + exceptions documentées.
+# Lancé en pre-commit (.husky/pre-commit) et en CI (.github/workflows/ci.yml).
+# Pour un faux positif ponctuel : commentaire « gitleaks:allow » sur la ligne,
+# ou son empreinte dans .gitleaksignore (historique déjà commité).
+
+title = "mynto"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Fichiers générés sans secret"
+paths = [
+  '''pnpm-lock\.yaml''',
+  # Modèles de rapport intégrés (fichiers encodés en base64).
+  '''packages/templates/src/builtin\.generated\.ts''',
+  '''THIRD_PARTY_NOTICES\.md''',
+  '''LICENSE''',
+]

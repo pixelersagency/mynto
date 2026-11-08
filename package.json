@@ -1,0 +1,64 @@
+{
+  "name": "mynto",
+  "version": "0.1.0",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "description": "Outil d'audit web auto-hébergé pour agences (8 axes)",
+  "homepage": "https://github.com/pixelersagency/mynto#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixelersagency/mynto.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pixelersagency/mynto/issues"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.12.0",
+  "scripts": {
+    "setup": "node scripts/init-env.mjs",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:db": "pnpm --filter @mynto/db test",
+    "test:e2e": "turbo run test:e2e",
+    "db:migrate": "pnpm --filter @mynto/db db:migrate",
+    "keys:rotate": "pnpm --filter @mynto/db keys:rotate",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,mjs,cjs,json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,cjs,json,md,yml,yaml}\"",
+    "prepare": "husky",
+    "admin:hash-password": "pnpm --silent --filter @mynto/web admin:hash-password",
+    "template:new": "pnpm --silent --filter @mynto/templates exec tsx scripts/cli.ts new",
+    "template:preview": "pnpm --silent --filter @mynto/templates exec tsx scripts/cli.ts preview",
+    "template:check": "pnpm --silent --filter @mynto/templates exec tsx scripts/cli.ts check",
+    "licenses:notices": "node scripts/third-party-notices.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "eslint": "^9.15.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.3.3",
+    "turbo": "^2.3.0",
+    "typescript": "^5.6.3"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "^5.4.21"
+    }
+  }
+}

@@ -1,0 +1,112 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secrets:
+    name: Secrets (gitleaks)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install gitleaks
+        env:
+          GITLEAKS_VERSION: 8.30.1
+        run: |
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" \
+            | tar -xz -C /usr/local/bin gitleaks
+      - name: Scan the whole history
+        run: gitleaks git . --redact --no-banner --config .gitleaks.toml
+
+  check:
+    name: Typecheck, lint, tests, build
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: ci
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports: ['6379:6379']
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      TEST_DATABASE_URL: postgres://postgres:ci@127.0.0.1:5432/postgres
+      REDIS_URL: redis://127.0.0.1:6379
+      TURBO_TELEMETRY_DISABLED: '1'
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Playwright version matches the scanner image
+        run: |
+          pkg=$(node -p "require('./apps/scanner/node_modules/playwright/package.json').version")
+          img=$(sed -n 's/^ARG PLAYWRIGHT_VERSION=//p' apps/scanner/Dockerfile)
+          echo "playwright $pkg, image $img"
+          test "$pkg" = "$img"
+      - name: Chromium for the scanner tests
+        run: pnpm --filter @mynto/scanner exec playwright install --with-deps chromium
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm test
+      - name: Web production build
+        run: pnpm --filter @mynto/web build
+
+  docker:
+    name: Docker images (build only, no push)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: apps/web/Dockerfile
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: apps/scanner/Dockerfile
+      - uses: docker/setup-buildx-action@v3
+      - name: Compose file is valid
+        run: |
+          cp .env.example .env
+          sed -i 's/^POSTGRES_PASSWORD=$/POSTGRES_PASSWORD=ci/' .env
+          docker compose config --quiet
+          docker compose -f docker-compose.yml -f docker-compose.n8n.yml config --quiet
+      - name: Build web
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/web/Dockerfile
+          push: false
+          tags: mynto/web:ci
+          cache-from: type=gha,scope=web
+          cache-to: type=gha,mode=max,scope=web
+      - name: Build scanner
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/scanner/Dockerfile
+          push: false
+          tags: mynto/scanner:ci
+          cache-from: type=gha,scope=scanner
+          cache-to: type=gha,mode=max,scope=scanner

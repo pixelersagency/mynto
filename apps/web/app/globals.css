@@ -1,0 +1,571 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans:
+    var(--font-body), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  --font-serif: var(--font-display), ui-serif, Georgia, 'Times New Roman', serif;
+
+  --color-background: oklch(0.985 0.005 85);
+  --color-foreground: oklch(0.2 0.015 60);
+  --color-muted: oklch(0.96 0.01 80);
+  --color-muted-foreground: oklch(0.5 0.02 70);
+  --color-border: oklch(0.9 0.012 75);
+  --color-input: oklch(0.94 0.008 75);
+  --color-ring: oklch(0.19 0.012 255);
+
+  --color-primary: oklch(0.19 0.012 255);
+  --color-primary-foreground: oklch(0.985 0.005 85);
+
+  --color-secondary: oklch(0.96 0.01 80);
+  --color-secondary-foreground: oklch(0.2 0.015 60);
+
+  --color-destructive: oklch(0.55 0.19 28);
+  --color-destructive-foreground: oklch(0.985 0.005 85);
+
+  --color-accent: oklch(0.6 0.12 150);
+  --color-accent-foreground: oklch(0.985 0.005 85);
+
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.2 0.015 60);
+
+  --color-score-high: oklch(0.6 0.14 150);
+  --color-score-medium: oklch(0.7 0.14 80);
+  --color-score-low: oklch(0.55 0.19 28);
+
+  --color-overlay-dark: oklch(0.19 0.012 255);
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+/* In the base layer so Tailwind border-color utilities (utilities layer)
+   still win; unlayered, this rule would override every one of them. */
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+  font-feature-settings: 'kern', 'liga';
+  letter-spacing: -0.01em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* =====================================================================
+   Dashboard, "Minimaliste" style (same language as the default report
+   template). Scoped to .dash so the public reports keep their own theme.
+   Light first; dark through html[data-theme='dark'] or the system
+   preference when no choice is stored (html without data-theme or
+   data-theme='system').
+
+   Restraint rules:
+   - warm paper neutrals carry the page: paper canvas (sidebar, login),
+     white surfaces, soft blocks for grouped content, thin warm rules only
+     between rows of a table or a list;
+   - ink is the only accent: primary action, links (underlined), focus,
+     the single series of a chart;
+   - success / warning / danger mark a state with one small marker (a dot
+     or the word), never a filled pill or a tinted panel;
+   - editorial serif (Newsreader) for page titles, section titles and big
+     numbers; Inter for the UI; small uppercase labels (11 px, 0.08em)
+     for column and group labels; numbers in tabular-nums;
+   - spacing on the 4 px grid; groups are separated by space, not by
+     hairlines or cards.
+
+   Contrasts (WCAG 2.2 AA), light / dark, checked on every surface
+   (--bg, --canvas, --bg-subtle, --bg-hover, paper hover):
+   - --fg >= 16.3 / >= 13.0; --fg-muted >= 4.7 / >= 6.3;
+   - --accent-fg on --accent (primary button) 18.4 / 15.4, hover 12.6 / 18.4;
+   - --success >= 4.5 / 8.9, --warning >= 4.6 / 6.8, --danger >= 5.7 / 5.6;
+   - --focus vs --bg 18.4 / 14.7; --control and --viz-mute-1 vs --bg 3.5 /
+     4.1 (non-text, 1.4.11).
+   ===================================================================== */
+@font-face {
+  font-family: 'Dash Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/inter-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Dash Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/inter-latin-500-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Dash Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/inter-latin-600-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Dash Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/inter-latin-700-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Dash Newsreader';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/newsreader-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Dash Newsreader';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/newsreader-latin-500-normal.woff2') format('woff2');
+}
+
+.dash {
+  --font-ui:
+    'Dash Inter', var(--font-body), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-editorial: 'Dash Newsreader', ui-serif, Georgia, 'Times New Roman', serif;
+
+  /* Paper canvas (sidebar, login), white surfaces, soft blocks. */
+  --canvas: #f4f3ef;
+  --bg: #ffffff;
+  --bg-subtle: #f7f6f2;
+  --bg-hover: #f4f3ef;
+  --border: #eeede8;
+  --border-strong: #dad8d0;
+  /* Boundary of form fields: 3.3:1 on paper, 3.7:1 on white (WCAG 1.4.11). */
+  --border-input: #878580;
+  --fg: #141414;
+  /* 5.4:1 on white, 4.9:1 on the paper canvas (AA). */
+  --fg-muted: #6b6b66;
+  /* Ink accent: primary button, links, focus, the one chart series. */
+  --accent: #141414;
+  --accent-hover: #34332f;
+  --accent-fg: #ffffff;
+  --accent-soft: #f4f3ef;
+  --focus: #141414;
+  /* Underline of links: the only cue once links share the ink, so 3:1. */
+  --link-line: #8a8a85;
+  /* Off track of a switch, ring of a radio: 3.5:1 on white (WCAG 1.4.11). */
+  --control: #8a8a85;
+  --control-thumb: #ffffff;
+  --success: #15803d;
+  --success-soft: #eef6ef;
+  --warning: #c2410c;
+  --warning-soft: #fbf1ea;
+  --danger: #b91c1c;
+  --danger-soft: #faeeec;
+  --scrim: rgb(20 20 20 / 0.32);
+  --shadow-pop: 0 8px 24px rgb(40 36 28 / 0.08), 0 1px 2px rgb(40 36 28 / 0.06);
+  --shadow-panel: -12px 0 32px rgb(40 36 28 / 0.06), -1px 0 0 rgb(40 36 28 / 0.02);
+
+  /*
+    Data viz (dataviz skill method). One ink series plus warm neutrals:
+    --viz-1 is the ink, --viz-mute-1 (3.5:1, a readable mark) and
+    --viz-mute-2 (decorative) the neutral steps. Score bands: good in ink,
+    fair in grey, poor in the warning colour. Every chart has a text table,
+    so no colour carries meaning alone.
+  */
+  --viz-1: #141414;
+  --viz-mute-1: #8a8a85;
+  --viz-mute-2: #e3e1da;
+  --viz-grid: #e8e7e2;
+  --viz-track: #eeede8;
+  --viz-ord-1: #c2410c;
+  --viz-ord-2: #8a8a85;
+  --viz-ord-3: #141414;
+
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-ui);
+  font-kerning: normal;
+  color-scheme: light;
+}
+
+html[data-theme='dark'] .dash {
+  --canvas: #12110f;
+  --bg: #1a1917;
+  --bg-subtle: #211f1c;
+  --bg-hover: #262420;
+  --border: #2d2b27;
+  --border-strong: #3d3b35;
+  --border-input: #7d7a71;
+  --fg: #edebe4;
+  --fg-muted: #a8a59c;
+  --accent: #edebe4;
+  --accent-hover: #ffffff;
+  --accent-fg: #141414;
+  --accent-soft: #26241f;
+  --focus: #edebe4;
+  --link-line: #8d8a81;
+  --control: #7d7a71;
+  --control-thumb: #edebe4;
+  --success: #4ade80;
+  --success-soft: #142a1b;
+  --warning: #fb923c;
+  --warning-soft: #2e1d10;
+  --danger: #f87171;
+  --danger-soft: #2f1715;
+  --scrim: rgb(10 9 8 / 0.6);
+  --shadow-pop: 0 8px 24px rgb(0 0 0 / 0.5);
+  --shadow-panel: -12px 0 32px rgb(0 0 0 / 0.45);
+  --viz-1: #edebe4;
+  --viz-mute-1: #8d8a81;
+  --viz-mute-2: #3d3b35;
+  --viz-grid: #34322d;
+  --viz-track: #2d2b27;
+  --viz-ord-1: #fb923c;
+  --viz-ord-2: #77746b;
+  --viz-ord-3: #edebe4;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme='light']):not([data-theme='dark']) .dash {
+    --canvas: #12110f;
+    --bg: #1a1917;
+    --bg-subtle: #211f1c;
+    --bg-hover: #262420;
+    --border: #2d2b27;
+    --border-strong: #3d3b35;
+    --border-input: #7d7a71;
+  --border-input: #7d7a71;
+    --fg: #edebe4;
+    --fg-muted: #a8a59c;
+    --accent: #edebe4;
+    --accent-hover: #ffffff;
+    --accent-fg: #141414;
+    --accent-soft: #26241f;
+    --focus: #edebe4;
+    --link-line: #8d8a81;
+    --control: #7d7a71;
+    --control-thumb: #edebe4;
+    --success: #4ade80;
+    --success-soft: #142a1b;
+    --warning: #fb923c;
+    --warning-soft: #2e1d10;
+    --danger: #f87171;
+    --danger-soft: #2f1715;
+    --scrim: rgb(10 9 8 / 0.6);
+    --shadow-pop: 0 8px 24px rgb(0 0 0 / 0.5);
+    --shadow-panel: -12px 0 32px rgb(0 0 0 / 0.45);
+    --viz-1: #edebe4;
+    --viz-mute-1: #8d8a81;
+    --viz-mute-2: #3d3b35;
+    --viz-grid: #34322d;
+    --viz-track: #2d2b27;
+    --viz-ord-1: #fb923c;
+    --viz-ord-2: #77746b;
+    --viz-ord-3: #edebe4;
+    color-scheme: dark;
+  }
+}
+
+/* Paper regions (sidebar, login page): the paper canvas behind, white
+   fields and active items on top of it (light). */
+.dash .dash-paper {
+  --bg-subtle: #ffffff;
+  --bg-hover: #fbfaf8;
+  --border: #e4e2db;
+  background: var(--canvas);
+}
+html[data-theme='dark'] .dash .dash-paper {
+  --bg-subtle: #262420;
+  --bg-hover: #1f1e1b;
+  --border: #2a2925;
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme='light']):not([data-theme='dark']) .dash .dash-paper {
+    --bg-subtle: #262420;
+    --bg-hover: #1f1e1b;
+    --border: #2a2925;
+  }
+}
+
+/* Typography of the Minimaliste style. Unlayered on purpose: these rules
+   win over the size / weight utilities of the elements they style. */
+.dash .dash-display {
+  font-family: var(--font-editorial);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+.dash .dash-heading {
+  font-family: var(--font-editorial);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.dash .dash-num {
+  font-family: var(--font-editorial);
+  font-weight: 400;
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: -0.02em;
+}
+.dash .dash-label,
+.dash thead th {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+/* Links: ink with a thin warm underline, full ink on hover. Colour alone
+   never tells a link apart. */
+.dash .dash-link {
+  color: var(--fg);
+  text-decoration-line: underline;
+  text-decoration-color: var(--link-line);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.dash .dash-link:hover {
+  text-decoration-color: currentColor;
+}
+/* Soft block for grouped content (radius 8, no border). */
+.dash .dash-block {
+  background: var(--bg-subtle);
+  border-radius: 8px;
+}
+
+/* Focus: one indicator per control, keyboard only.
+   - Non-text controls (buttons, links, summaries, checkboxes): a 2px ring
+     outside the control.
+   - Text fields (and the wrappers that draw a field around a bare input,
+     `.dash-field`): no outline; the 1px border turns to the focus colour with
+     a soft halo. Focus colour vs the unfocused border and the page: >= 3.7:1
+     in light, >= 4.8:1 in dark (WCAG 1.4.11 / 2.4.7).
+   - `.dash-bare`: a borderless input that is the only control of its
+     container (command palette); the caret and the open dialog show focus. */
+.dash {
+  --focus-halo: color-mix(in srgb, var(--focus) 18%, transparent);
+}
+.dash :focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+.dash
+  :is(
+    input:not(
+      [type='checkbox'],
+      [type='radio'],
+      [type='range'],
+      [type='file'],
+      [type='color'],
+      [type='button'],
+      [type='submit'],
+      [type='reset']
+    ),
+    textarea,
+    select
+  ):focus-visible {
+  outline: none;
+  border-color: var(--focus);
+  border-radius: revert-layer;
+  box-shadow: 0 0 0 3px var(--focus-halo);
+}
+.dash .dash-field:focus-within {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px var(--focus-halo);
+}
+.dash .dash-field :is(input, textarea):focus-visible,
+.dash .dash-bare.dash-bare:focus-visible {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* Last rows fade when more pages follow (visual only). */
+.dash-fade-tail tbody tr:nth-last-child(2) {
+  opacity: 0.75;
+}
+.dash-fade-tail tbody tr:last-child {
+  opacity: 0.5;
+}
+.dash-fade-tail tbody tr:hover,
+.dash-fade-tail tbody tr:focus-within {
+  opacity: 1;
+}
+
+/* A group of a page (settings, forms, panel): space, no rule, no card. */
+.dash-group {
+  padding-top: 32px;
+}
+
+/* Inline notes (errors, warnings, one-time secrets): a soft block, text in
+   the state colour, no tinted panel. The transparent border shows up in
+   forced-colors mode, where backgrounds are dropped. */
+.dash-note {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--bg-subtle);
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--fg);
+}
+.dash-note--danger {
+  color: var(--danger);
+}
+.dash-note--warning {
+  box-shadow: inset 2px 0 0 var(--warning);
+}
+@media (forced-colors: active) {
+  .dash-note--warning {
+    border-left: 3px solid CanvasText;
+  }
+}
+
+/* =====================================================================
+   Motion and record panel. Motion only answers an action (panel opens,
+   palette opens, thumbnail on hover); nothing loops or floats.
+   ===================================================================== */
+.dash {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Selected row: a flat fill, like hover but kept. */
+.dash-row-selected {
+  background: var(--bg-subtle);
+}
+
+/* Opened in the last 24 h: a small static dot next to the name. */
+.dash-pulse {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--success);
+}
+
+.dash-panel {
+  overscroll-behavior: contain;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dash-panel {
+    animation: dash-panel-in 220ms var(--ease-out) both;
+  }
+  .dash-palette {
+    animation: dash-pop 140ms var(--ease-out) both;
+  }
+}
+@keyframes dash-panel-in {
+  from {
+    opacity: 0.4;
+    transform: translateX(16px);
+  }
+}
+@keyframes dash-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+/* Keyboard hint chips. */
+.dash kbd {
+  display: inline-flex;
+  min-width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border-radius: 4px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 11px;
+  color: var(--fg-muted);
+}
+
+/* Headings focused by script (panel title) keep focus without a ring. */
+.dash [tabindex='-1']:focus-visible {
+  outline: none;
+}
+
+/* Radio (components/ui/radio-group): a native radio drawn as a ring with a
+   centre dot. Arrow keys, labels and form posting stay native. */
+.dash .dash-radio {
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  flex-shrink: 0;
+  border: 1px solid var(--control);
+  border-radius: 9999px;
+  background: var(--bg);
+  cursor: pointer;
+}
+.dash .dash-radio::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--accent);
+  transform: scale(0);
+}
+.dash .dash-radio:checked {
+  border-color: var(--accent);
+}
+.dash .dash-radio:checked::before {
+  transform: scale(1);
+}
+.dash .dash-radio:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dash .dash-radio::before {
+    transition: transform 120ms var(--ease-out);
+  }
+}
+
+/* Option cards and segments: the whole option carries the focus ring. */
+.dash .dash-option:has(input:focus-visible) {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.dash .dash-option input:focus-visible {
+  outline: none;
+}

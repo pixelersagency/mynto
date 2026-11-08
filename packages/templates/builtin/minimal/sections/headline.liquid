@@ -1,0 +1,1 @@
+{% if score.value == nil %}Audit de {{ audit.host }}{% elsif counts.total == 0 %}{{ audit.host }} tient la route. <span class="mr-title__soft">Voici le détail.</span>{% else %}{{ audit.host }} peut faire mieux. <span class="mr-title__soft">Voici par où commencer.</span>{% endif %}

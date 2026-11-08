@@ -1,0 +1,16 @@
+{
+  "name": "@mynto/tsconfig",
+  "version": "0.1.0",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "files": [
+    "base.json",
+    "node.json",
+    "nextjs.json"
+  ],
+  "exports": {
+    "./base": "./base.json",
+    "./node": "./node.json",
+    "./nextjs": "./nextjs.json"
+  }
+}

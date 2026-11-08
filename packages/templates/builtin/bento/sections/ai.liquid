@@ -1,0 +1,51 @@
+<section class="mr-section mr-ai" id="{{ ai.anchor }}" aria-labelledby="mr-ai-title">
+  <h2 id="mr-ai-title" class="mr-h2"><span class="mr-kicker">Préparation IA{% if ai.evaluated and ai.failed == false %} · {% if ai.included_in_global_score %}comptée dans le score global{% else %}hors score global{% endif %}{% endif %}</span> <span class="mr-h2__title">Un assistant IA peut-il lire ton site ?</span></h2>
+  {% if ai.evaluated == false %}
+  <p class="mr-empty">Non évalué pour cet audit.</p>
+  {% elsif ai.failed %}
+  <p class="mr-empty">Le site n’a pas répondu pendant les tests : rien n’a pu être mesuré.</p>
+  {% else %}
+  <div class="mr-ai__top">
+    <div class="mr-ai__card">
+      <p class="mr-ai__score">{% if ai.score.value != nil %}<span class="mr-ai__num">{{ ai.score.value }}<span class="mr-ai__of"><span aria-hidden="true">/100</span><span class="mr-visually-hidden"> sur 100</span></span></span> <span class="mr-band mr-band--{{ ai.score.band }}">{{ ai.score.band_label }}</span>{% endif %}</p>
+      <p class="mr-ai__level">{% if ai.level != nil %}Niveau {{ ai.level }} sur {{ ai.max_level }}{% if ai.level_name %}, {{ ai.level_name | downcase }}{% endif %}{% endif %}</p>
+      {% if ai.level != nil %}<ol class="mr-ladder" aria-label="Échelle de maturité : niveau {{ ai.level }} atteint sur 5">
+        {% for n in (1..5) %}<li class="mr-ladder__step{% if n <= ai.level %} is-reached{% elsif n > ai.max_level %} is-capped{% endif %}"><span class="mr-ladder__bar"></span><span class="mr-ladder__n">{{ n }}<span class="mr-visually-hidden">{% if n <= ai.level %} atteint{% elsif n > ai.max_level %} hors périmètre{% else %} à atteindre{% endif %}</span></span></li>{% endfor %}
+      </ol>{% endif %}
+      <p class="mr-note">{% if ai.site_type_label %}{{ ai.site_type_label }}{% if ai.site_type_auto %} (type détecté){% endif %} : niveau maximum {{ ai.max_level }} sur 5. {% endif %}</p>
+    </div>
+    {% if ai.top_fixes.size > 0 %}
+    <div class="mr-ai__fixes">
+      <h3 class="mr-h3">À corriger en premier</h3>
+      <ul class="mr-fixes">
+        {% for c in ai.top_fixes %}
+        <li class="mr-fix">
+          <p class="mr-fix__head"><strong class="mr-fix__name">{{ c.label }}</strong> <span class="mr-status mr-status--fail">{{ c.status_label }}</span></p>
+          <p class="mr-fix__msg">{{ c.message }}</p>
+          {% if c.fix %}<p class="mr-fix__how"><span class="mr-visually-hidden">Comment corriger : </span>{{ c.fix }}</p>{% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+  {% assign ai_total = ai.counts.pass | plus: ai.counts.fail | plus: ai.counts.other %}
+  {% if ai.categories.size > 0 %}
+  <div class="mr-ai__tests">
+    <h3 class="mr-h3 mr-tests__head">Les {{ ai_total }} tests <span class="mr-tests__counts">{{ ai.counts.pass }} {{ ai.counts.pass | plural: 'réussi', 'réussis' }}, {{ ai.counts.fail }} à corriger</span></h3>
+    <div class="mr-tests">
+      {% for cat in ai.categories %}
+      <div class="mr-tests__group">
+        <h4 class="mr-h4">{{ cat.label }}</h4>
+        <ul>
+          {% for c in cat.checks %}
+          <li class="mr-test mr-test--{{ c.status }}"><span class="mr-test__name">{{ c.label }}</span> <span class="mr-status mr-status--{{ c.status }}">{{ c.status_label }}</span><span class="mr-visually-hidden"> : </span><span class="mr-test__msg">{{ c.message }}</span></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  {% endif %}
+</section>

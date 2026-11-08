@@ -1,0 +1,1155 @@
+{
+  "contract": "report-data",
+  "version": 1,
+  "mode": "web",
+  "generated_at": "2026-11-02T10:00:00.000Z",
+  "audit": {
+    "slug": "ex4mpleSlug01",
+    "url": "https://www.boulangerie-martin.fr/",
+    "host": "boulangerie-martin.fr",
+    "name": "Boulangerie Martin",
+    "created_at": "2026-11-02T09:14:00.000Z",
+    "created_label": "2 novembre 2026",
+    "expires_at": "2027-01-01T09:14:00.000Z",
+    "expires_label": "1 janvier 2027",
+    "sector": "artisanat alimentaire",
+    "main_kpi": "Commandes de gâteaux en ligne",
+    "stack": "WordPress",
+    "hero_image_url": null,
+    "favicon_url": null,
+    "pages_analyzed": 4,
+    "llm_assisted": true
+  },
+  "score": {
+    "value": 58,
+    "band": "fair",
+    "band_label": "À améliorer",
+    "evaluated_axes": 8,
+    "total_axes": 8,
+    "partial": false,
+    "ai_included": false
+  },
+  "counts": {
+    "P0": 2,
+    "P1": 3,
+    "P2": 4,
+    "P3": 1,
+    "total": 10
+  },
+  "summary": {
+    "text": "Le site présente bien la boutique mais il perd des commandes. Les pages mettent plus de 4 secondes à s’afficher sur mobile, la politique de confidentialité manque alors que trois traceurs se chargent sans consentement, et le bouton de commande n’apparaît qu’en bas de page. Trois chantiers courts suffisent à corriger l’essentiel.",
+    "impact": "Corriger la vitesse et la place du bouton peut faire gagner 10 à 20 % de commandes en ligne sur mobile."
+  },
+  "priorities": [
+    {
+      "rank": 1,
+      "title": "Mettre le site en conformité RGPD",
+      "reason": "Trois traceurs publicitaires se chargent avant tout consentement et la politique de confidentialité est absente. C’est le risque le plus direct (CNIL) et le plus simple à corriger.",
+      "expected_outcome": "Risque de sanction écarté, confiance des clients renforcée.",
+      "findings": [
+        {
+          "id": "conformite.trackers.without_banner:a1",
+          "anchor": "pb-conformite-trackers-without_banner-a1",
+          "title": "Traceurs chargés sans consentement",
+          "severity": "P0"
+        },
+        {
+          "id": "conformite.privacy.missing:a2",
+          "anchor": "pb-conformite-privacy-missing-a2",
+          "title": "Politique de confidentialité absente",
+          "severity": "P0"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "Accélérer l’affichage sur mobile",
+      "reason": "Le premier affichage prend 4,6 s. Les photos des gâteaux pèsent 6 Mo et ne sont pas différées. Sur mobile, un visiteur sur deux part avant.",
+      "expected_outcome": "Affichage sous 2,5 s, moins d’abandons sur mobile.",
+      "findings": [
+        {
+          "id": "perf.lcp.slow:b1",
+          "anchor": "pb-perf-lcp-slow-b1",
+          "title": "Affichage principal lent sur mobile",
+          "severity": "P1"
+        },
+        {
+          "id": "perf.images.not_lazy:b2",
+          "anchor": "pb-perf-images-not_lazy-b2",
+          "title": "Images chargées d’un coup",
+          "severity": "P2"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "Rendre la commande visible tout de suite",
+      "reason": "Le bouton « Commander un gâteau » est sous la ligne de flottaison. Les visiteurs qui viennent pour commander doivent le chercher.",
+      "expected_outcome": "Plus de commandes depuis la page d’accueil.",
+      "findings": [
+        {
+          "id": "conversion.cta.not_above_fold:c1",
+          "anchor": "pb-conversion-cta-not_above_fold-c1",
+          "title": "Bouton de commande sous la ligne de flottaison",
+          "severity": "P1"
+        }
+      ]
+    }
+  ],
+  "quick_wins": [
+    "Ajouter la politique de confidentialité au pied de page.",
+    "Compresser les 6 photos de la page d’accueil en WebP.",
+    "Remonter le bouton de commande dans le premier écran.",
+    "Renseigner un texte alternatif sur les 9 images produits."
+  ],
+  "cost": {
+    "days": 4.5,
+    "days_label": "4,5 jours",
+    "amount_low": 2430,
+    "amount_high": 2970,
+    "amount_label": "2 430 € à 2 970 € HT",
+    "daily_rate": 600,
+    "daily_rate_label": "600 € HT par jour",
+    "items_count": 2,
+    "verdict": "correction_or_redesign",
+    "verdict_label": "Correction ciblée possible, refonte à envisager selon tes objectifs.",
+    "redesign_reasons": [],
+    "disclaimer": "Estimation indicative fondée sur des temps moyens par correction."
+  },
+  "axes": [
+    {
+      "id": "seo_technique",
+      "label": "SEO technique",
+      "short": "SEO tech",
+      "anchor": "axe-seo-technique",
+      "evaluated": true,
+      "score": {
+        "value": 64,
+        "band": "fair",
+        "band_label": "À améliorer"
+      },
+      "findings_count": 2,
+      "p0_count": 0,
+      "open_by_default": true,
+      "findings": [
+        {
+          "id": "seo.meta_description.missing:e1",
+          "anchor": "pb-seo-meta_description-missing-e1",
+          "axis": "seo_technique",
+          "axis_label": "SEO technique",
+          "severity": "P2",
+          "severity_label": "À améliorer",
+          "effort": "standard",
+          "effort_label": "Standard",
+          "title": "Méta description absente sur 3 pages",
+          "constat": "Les pages Gâteaux, Contact et La boutique n’ont pas de description.",
+          "impact": "Google choisit alors un extrait au hasard dans la page.",
+          "recommendation": "Rédiger une description de 140 à 160 caractères par page.",
+          "code": null,
+          "legal_refs": [],
+          "urls": [
+            "https://www.boulangerie-martin.fr/"
+          ],
+          "urls_more": 0
+        },
+        {
+          "id": "seo.json_ld.absent:e2",
+          "anchor": "pb-seo-json_ld-absent-e2",
+          "axis": "seo_technique",
+          "axis_label": "SEO technique",
+          "severity": "P2",
+          "severity_label": "À améliorer",
+          "effort": "standard",
+          "effort_label": "Standard",
+          "title": "Pas de données structurées",
+          "constat": "Aucune donnée LocalBusiness (horaires, adresse, téléphone).",
+          "impact": "La fiche n’apparaît pas enrichie dans les résultats locaux.",
+          "recommendation": "Ajouter un bloc JSON-LD de type Bakery avec les horaires et l’adresse.",
+          "code": null,
+          "legal_refs": [],
+          "urls": [
+            "https://www.boulangerie-martin.fr/"
+          ],
+          "urls_more": 0
+        }
+      ],
+      "passed": [
+        "Site servi en HTTPS",
+        "Pages internes uniques",
+        "robots.txt n'interdit pas le crawl",
+        "sitemap.xml trouvé",
+        "Sitemap déclaré dans robots.txt",
+        "Balise <title> présente",
+        "Title bien dimensionné",
+        "Meta description bien dimensionnée",
+        "og:image définie",
+        "Twitter Card optimisée",
+        "Canonical cohérent",
+        "Un seul H1 par page",
+        "Hiérarchie des titres respectée",
+        "hreflang présent (si multilingue)",
+        "Bots IA autorisés"
+      ]
+    },
+    {
+      "id": "performance",
+      "label": "Performance",
+      "short": "Perf",
+      "anchor": "axe-performance",
+      "evaluated": true,
+      "score": {
+        "value": 39,
+        "band": "poor",
+        "band_label": "Critique"
+      },
+      "findings_count": 2,
+      "p0_count": 0,
+      "open_by_default": true,
+      "findings": [
+        {
+          "id": "perf.lcp.slow:b1",
+          "anchor": "pb-perf-lcp-slow-b1",
+          "axis": "performance",
+          "axis_label": "Performance",
+          "severity": "P1",
+          "severity_label": "Important",
+          "effort": "standard",
+          "effort_label": "Standard",
+          "title": "Affichage principal lent sur mobile",
+          "constat": "Le plus grand élément (photo du gâteau du moment) s’affiche après 4,6 s sur mobile.",
+          "impact": "Au-delà de 2,5 s, une partie des visiteurs mobiles quitte la page.",
+          "recommendation": "Servir la photo en WebP, à la bonne taille, et la précharger.",
+          "code": "<link rel=\"preload\" as=\"image\" href=\"/wp-content/uploads/gateau-du-moment.webp\" fetchpriority=\"high\">",
+          "legal_refs": [],
+          "urls": [
+            "https://www.boulangerie-martin.fr/"
+          ],
+          "urls_more": 0
+        },
+        {
+          "id": "perf.images.not_lazy:b2",
+          "anchor": "pb-perf-images-not_lazy-b2",
+          "axis": "performance",
+          "axis_label": "Performance",
+          "severity": "P2",
+          "severity_label": "À améliorer",
+          "effort": "standard",
+          "effort_label": "Standard",
+          "title": "Images chargées d’un coup",
+          "constat": "14 images sous la ligne de flottaison se chargent dès l’ouverture.",
+          "impact": "La page pèse 6 Mo, ce qui ralentit tout le reste.",
+          "recommendation": "Ajouter loading=\"lazy\" sur les images hors du premier écran.",
+          "code": null,
+          "legal_refs": [],
+          "urls": [
+            "https://www.boulangerie-martin.fr/"
+          ],
+          "urls_more": 0
+        }
+      ],
+      "passed": [
+        "TTFB rapide",
+        "HTML raisonnable",
+        "Images dimensionnées (anti-CLS)",
+        "Score Lighthouse performance correct",
+        "CLS stable",
+        "TBT raisonnable",
+        "Poids total raisonnable"
+      ]
+    },
+    {
+      "id": "accessibilite",
+      "label": "Accessibilité",
+      "short": "A11y",
+      "anchor": "axe-accessibilite",
+      "evaluated": true,
+      "score": {
+        "value": 46,
+        "band": "poor",
+        "band_label": "Critique"
+      },
+      "findings_count": 2,
+      "p0_count": 0,
+      "open_by_default": true,
+      "findings": [
+        {
+          "id": "a11y.images.missing_alt:d1",
+          "anchor": "pb-a11y-images-missing_alt-d1",
+          "axis": "accessibilite",
+          "axis_label": "Accessibilité",
+          "severity": "P1",
+          "severity_label": "Important",
+          "effort": "standard",
+          "effort_label": "Standard",
+          "title": "9 images sans texte alternatif",
+          "constat": "Les photos des produits n’ont pas d’attribut alt.",
+          "impact": "Un lecteur d’écran annonce « image » sans dire laquelle. C’est aussi une perte en SEO image.",
+          "recommendation": "Décrire chaque produit en quelques mots dans l’attribut alt.",
+          "code": null,
+          "legal_refs": [
+            {
+              "label": "RGAA 1.1",
+              "url": "https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#1.1"
+            }
+          ],
+          "urls": [
+            "https://www.boulangerie-martin.fr/"
+          ],
+          "urls_more": 0
+        },
+        {
+          "id": "a11y.skip_link.missing:d2",
+          "anchor": "pb-a11y-skip_link-missing-d2",
+          "axis": "accessibilite",
+          "axis_label": "Accessibilité",
+          "severity": "P2",
+          "severity_label": "À améliorer",
+          "effort": "standard",
+          "effort_label": "Standard",
+          "title": "Pas de lien d’évitement",
+          "constat": "Au clavier, il faut traverser tout le menu avant d’atteindre le contenu.",
+          "impact": "Gêne les personnes qui naviguent au clavier.",
+          "recommendation": "Ajouter un lien « Aller au contenu » en tout début de page.",
+          "code": null,
+          "legal_refs": [],
+          "urls": [
+            "https://www.boulangerie-martin.fr/"
+          ],
+          "urls_more": 0
+        }
+      ],
+      "passed": [
+        "Viewport autorise le zoom",
+        "Attribut lang sur <html>",
+        "Aucune violation WCAG critique (axe-core)",
+        "Aucune violation WCAG sérieuse (axe-core)",
+        "Score Lighthouse accessibilité correct"
+      ]
+    },
+    {
+      "id": "conformite",
+      "label": "Conformité légale",
+      "short": "Conformité",
+      "anchor": "axe-conformite",
+      "evaluated": true,
+      "score": {
+        "value": 32,
+        "band": "poor",
+        "band_label": "Critique"
+      },
+      "findings_count": 2,
+      "p0_count": 2,
+      "open_by_default": true,
+      "findings": [
+        {
+          "id": "conformite.trackers.without_banner:a1",
+          "anchor": "pb-conformite-trackers-without_banner-a1",
+          "axis": "conformite",
+          "axis_label": "Conformité légale",
+          "severity": "P0",
+          "severity_label": "Critique",
+          "effort": "standard",
+          "effort_label": "Standard",
+          "title": "Traceurs chargés sans consentement",
+          "constat": "Google Analytics, Meta Pixel et Hotjar se chargent dès l’arrivée sur la page, avant tout choix du visiteur.",
+          "impact": "La CNIL sanctionne ce cas, même pour une petite entreprise.",
+          "recommendation": "Installer un bandeau de consentement qui bloque les traceurs tant que le visiteur n’a pas accepté.",
+          "code": null,
+          "legal_refs": [
+            {
+              "label": "CNIL, lignes directrices cookies",
+              "url": "https://www.cnil.fr/fr/cookies-et-autres-traceurs"
+            }
+          ],
+          "urls": [
+            "https://www.boulangerie-martin.fr/"
+          ],
+          "urls_more": 0
+        },
+        {
+          "id": "conformite.privacy.missing:a2",
+          "anchor": "pb-conformite-privacy-missing-a2",
+          "axis": "conformite",
+          "axis_label": "Conformité légale",
+          "severity": "P0",
+          "severity_label": "Critique",
+          "effort": "standard",
+          "effort_label": "Standard",
+          "title": "Politique de confidentialité absente",
+          "constat": "Aucune page ne décrit l’usage des données des clients (formulaire de commande, newsletter).",
+          "impact": "Obligation RGPD. Un client qui cherche cette page et ne la trouve pas perd confiance.",
+          "recommendation": "Publier une politique de confidentialité et la lier dans le pied de page.",
+          "code": null,
+          "legal_refs": [
+            {
+              "label": "RGPD, articles 12 à 14",
+              "url": "https://www.cnil.fr/fr/reglement-europeen-protection-donnees"
+            }
+          ],
+          "urls": [
+            "https://www.boulangerie-martin.fr/"
+          ],
+          "urls_more": 0
+        }
+      ],
+      "passed": [
+        "Mentions légales présentes",
+        "DPO mentionné"
+      ]
+    },
+    {
+      "id": "conversion",
+      "label": "Conversion",
+      "short": "Conversion",
+      "anchor": "axe-conversion",
+      "evaluated": true,
+      "score": {
+        "value": 68,
+        "band": "fair",
+        "band_label": "À améliorer"
+      },
+      "findings_count": 1,
+      "p0_count": 0,
+      "open_by_default": true,
+      "findings": [
+        {
+          "id": "conversion.cta.not_above_fold:c1",
+          "anchor": "pb-conversion-cta-not_above_fold-c1",
+          "axis": "conversion",
+          "axis_label": "Conversion",
+          "severity": "P1",
+          "severity_label": "Important",
+          "effort": "standard",
+          "effort_label": "Standard",
+          "title": "Bouton de commande sous la ligne de flottaison",
+          "constat": "Le bouton « Commander un gâteau » n’apparaît qu’après deux écrans de défilement.",
+          "impact": "Les visiteurs venus pour commander doivent le chercher.",
+          "recommendation": "Placer le bouton dans le premier écran, à côté de la photo principale.",
+          "code": null,
+          "legal_refs": [],
+          "urls": [
+            "https://www.boulangerie-martin.fr/"
+          ],
+          "urls_more": 0
+        }
+      ],
+      "passed": [
+        "Page /pricing dédiée",
+        "Témoignages complets",
+        "Canal de contact direct",
+        "CTA principal contrasté",
+        "Proposition de valeur claire",
+        "Copywriting étayé"
+      ]
+    },
+    {
+      "id": "seo_contenu",
+      "label": "SEO contenu",
+      "short": "Contenu",
+      "anchor": "axe-seo-contenu",
+      "evaluated": true,
+      "score": {
+        "value": 51,
+        "band": "fair",
+        "band_label": "À améliorer"
+      },
+      "findings_count": 1,
+      "p0_count": 0,
+      "open_by_default": true,
+      "findings": [
+        {
+          "id": "seo_contenu.blog.absent:f1",
+          "anchor": "pb-seo_contenu-blog-absent-f1",
+          "axis": "seo_contenu",
+          "axis_label": "SEO contenu",
+          "severity": "P3",
+          "severity_label": "Détail",
+          "effort": "standard",
+          "effort_label": "Standard",
+          "title": "Pas de contenu éditorial",
+          "constat": "Aucune page de conseils ou d’actualités.",
+          "impact": "Moins de requêtes couvertes (gâteau d’anniversaire, galette…).",
+          "recommendation": "Publier une page par grande occasion de l’année.",
+          "code": null,
+          "legal_refs": [],
+          "urls": [
+            "https://www.boulangerie-martin.fr/"
+          ],
+          "urls_more": 0
+        }
+      ],
+      "passed": [
+        "Blog hébergé sur le domaine principal",
+        "Contenu home suffisant",
+        "Lisibilité correcte"
+      ]
+    },
+    {
+      "id": "ux",
+      "label": "UX",
+      "short": "UX",
+      "anchor": "axe-ux",
+      "evaluated": true,
+      "score": {
+        "value": 81,
+        "band": "good",
+        "band_label": "Bon"
+      },
+      "findings_count": 0,
+      "p0_count": 0,
+      "open_by_default": true,
+      "findings": [],
+      "passed": [
+        "Viewport mobile configuré",
+        "Navigation principale présente",
+        "Navigation lisible",
+        "Aucune friction UX visible"
+      ]
+    },
+    {
+      "id": "ui",
+      "label": "UI",
+      "short": "UI",
+      "anchor": "axe-ui",
+      "evaluated": true,
+      "score": {
+        "value": 74,
+        "band": "fair",
+        "band_label": "À améliorer"
+      },
+      "findings_count": 0,
+      "p0_count": 0,
+      "open_by_default": true,
+      "findings": [],
+      "passed": [
+        "Styles inline raisonnables",
+        "Nombre de polices raisonnable",
+        "Hero clair",
+        "Hiérarchie visuelle nette",
+        "Design au niveau du secteur",
+        "Identité visuelle cohérente"
+      ]
+    }
+  ],
+  "top_issues": [
+    {
+      "id": "conformite.trackers.without_banner:a1",
+      "anchor": "pb-conformite-trackers-without_banner-a1",
+      "axis": "conformite",
+      "axis_label": "Conformité légale",
+      "severity": "P0",
+      "severity_label": "Critique",
+      "effort": "standard",
+      "effort_label": "Standard",
+      "title": "Traceurs chargés sans consentement",
+      "constat": "Google Analytics, Meta Pixel et Hotjar se chargent dès l’arrivée sur la page, avant tout choix du visiteur.",
+      "impact": "La CNIL sanctionne ce cas, même pour une petite entreprise.",
+      "recommendation": "Installer un bandeau de consentement qui bloque les traceurs tant que le visiteur n’a pas accepté.",
+      "code": null,
+      "legal_refs": [
+        {
+          "label": "CNIL, lignes directrices cookies",
+          "url": "https://www.cnil.fr/fr/cookies-et-autres-traceurs"
+        }
+      ],
+      "urls": [
+        "https://www.boulangerie-martin.fr/"
+      ],
+      "urls_more": 0
+    },
+    {
+      "id": "conformite.privacy.missing:a2",
+      "anchor": "pb-conformite-privacy-missing-a2",
+      "axis": "conformite",
+      "axis_label": "Conformité légale",
+      "severity": "P0",
+      "severity_label": "Critique",
+      "effort": "standard",
+      "effort_label": "Standard",
+      "title": "Politique de confidentialité absente",
+      "constat": "Aucune page ne décrit l’usage des données des clients (formulaire de commande, newsletter).",
+      "impact": "Obligation RGPD. Un client qui cherche cette page et ne la trouve pas perd confiance.",
+      "recommendation": "Publier une politique de confidentialité et la lier dans le pied de page.",
+      "code": null,
+      "legal_refs": [
+        {
+          "label": "RGPD, articles 12 à 14",
+          "url": "https://www.cnil.fr/fr/reglement-europeen-protection-donnees"
+        }
+      ],
+      "urls": [
+        "https://www.boulangerie-martin.fr/"
+      ],
+      "urls_more": 0
+    },
+    {
+      "id": "perf.lcp.slow:b1",
+      "anchor": "pb-perf-lcp-slow-b1",
+      "axis": "performance",
+      "axis_label": "Performance",
+      "severity": "P1",
+      "severity_label": "Important",
+      "effort": "standard",
+      "effort_label": "Standard",
+      "title": "Affichage principal lent sur mobile",
+      "constat": "Le plus grand élément (photo du gâteau du moment) s’affiche après 4,6 s sur mobile.",
+      "impact": "Au-delà de 2,5 s, une partie des visiteurs mobiles quitte la page.",
+      "recommendation": "Servir la photo en WebP, à la bonne taille, et la précharger.",
+      "code": "<link rel=\"preload\" as=\"image\" href=\"/wp-content/uploads/gateau-du-moment.webp\" fetchpriority=\"high\">",
+      "legal_refs": [],
+      "urls": [
+        "https://www.boulangerie-martin.fr/"
+      ],
+      "urls_more": 0
+    },
+    {
+      "id": "a11y.images.missing_alt:d1",
+      "anchor": "pb-a11y-images-missing_alt-d1",
+      "axis": "accessibilite",
+      "axis_label": "Accessibilité",
+      "severity": "P1",
+      "severity_label": "Important",
+      "effort": "standard",
+      "effort_label": "Standard",
+      "title": "9 images sans texte alternatif",
+      "constat": "Les photos des produits n’ont pas d’attribut alt.",
+      "impact": "Un lecteur d’écran annonce « image » sans dire laquelle. C’est aussi une perte en SEO image.",
+      "recommendation": "Décrire chaque produit en quelques mots dans l’attribut alt.",
+      "code": null,
+      "legal_refs": [
+        {
+          "label": "RGAA 1.1",
+          "url": "https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#1.1"
+        }
+      ],
+      "urls": [
+        "https://www.boulangerie-martin.fr/"
+      ],
+      "urls_more": 0
+    },
+    {
+      "id": "conversion.cta.not_above_fold:c1",
+      "anchor": "pb-conversion-cta-not_above_fold-c1",
+      "axis": "conversion",
+      "axis_label": "Conversion",
+      "severity": "P1",
+      "severity_label": "Important",
+      "effort": "standard",
+      "effort_label": "Standard",
+      "title": "Bouton de commande sous la ligne de flottaison",
+      "constat": "Le bouton « Commander un gâteau » n’apparaît qu’après deux écrans de défilement.",
+      "impact": "Les visiteurs venus pour commander doivent le chercher.",
+      "recommendation": "Placer le bouton dans le premier écran, à côté de la photo principale.",
+      "code": null,
+      "legal_refs": [],
+      "urls": [
+        "https://www.boulangerie-martin.fr/"
+      ],
+      "urls_more": 0
+    }
+  ],
+  "ai": {
+    "evaluated": true,
+    "failed": false,
+    "score": {
+      "value": 43,
+      "band": "poor",
+      "band_label": "Critique"
+    },
+    "anchor": "preparation-ia",
+    "level": 1,
+    "level_name": "Présence de base",
+    "max_level": 3,
+    "site_type_label": "Site vitrine",
+    "site_type_auto": true,
+    "included_in_global_score": false,
+    "counts": {
+      "pass": 4,
+      "fail": 6,
+      "other": 1
+    },
+    "categories": [
+      {
+        "id": "discoverability",
+        "label": "Découvrabilité",
+        "checks": [
+          {
+            "id": "robots_txt",
+            "label": "robots.txt",
+            "description": "Fichier robots.txt présent et lisible par les robots.",
+            "status": "pass",
+            "status_label": "Réussi",
+            "applicable": true,
+            "message": "robots.txt présent, 4 directives.",
+            "fix": null,
+            "weight": 3
+          },
+          {
+            "id": "sitemap",
+            "label": "Sitemap",
+            "description": "Plan du site en XML, accessible et déclaré dans robots.txt.",
+            "status": "pass",
+            "status_label": "Réussi",
+            "applicable": true,
+            "message": "sitemap.xml trouvé, 38 URLs.",
+            "fix": null,
+            "weight": 3
+          },
+          {
+            "id": "link_headers",
+            "label": "En-têtes Link",
+            "description": "En-têtes HTTP Link qui indiquent aux agents les versions lisibles par une machine.",
+            "status": "fail",
+            "status_label": "À corriger",
+            "applicable": true,
+            "message": "Aucun en-tête Link utile aux agents.",
+            "fix": "Ajoute un en-tête HTTP Link à tes pages publiques pour indiquer aux agents où trouver leurs versions lisibles par une machine.",
+            "weight": 2
+          },
+          {
+            "id": "dns_aid",
+            "label": "DNS pour agents (DNS-AID)",
+            "description": "Enregistrements DNS _agents qui indiquent aux agents où s’adresser.",
+            "status": "fail",
+            "status_label": "À corriger",
+            "applicable": true,
+            "message": "Aucun enregistrement _agents.",
+            "fix": "Ajoute des enregistrements DNS sous _agents.ton-domaine : un SVCB _index._agents qui pointe vers la liste de tes ressources pour agents.",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "id": "content_accessibility",
+        "label": "Accès au contenu",
+        "checks": [
+          {
+            "id": "markdown_negotiation",
+            "label": "Version Markdown",
+            "description": "Le site renvoie du Markdown quand un agent le demande.",
+            "status": "fail",
+            "status_label": "À corriger",
+            "applicable": true,
+            "message": "Le site renvoie du HTML quand on demande du Markdown.",
+            "fix": "Propose une version Markdown de tes pages publiques : renvoie du text/markdown quand la requête contient Accept: text/markdown, et rends la même page disponible avec le suffixe .md.",
+            "weight": 3
+          },
+          {
+            "id": "llms_txt",
+            "label": "llms.txt",
+            "description": "Fichier llms.txt qui résume le site pour les modèles d’IA.",
+            "status": "fail",
+            "status_label": "À corriger",
+            "applicable": true,
+            "message": "/llms.txt répond 404.",
+            "fix": "Publie un fichier /llms.txt en Markdown : un titre H1 avec le nom du site, un paragraphe qui dit ce que tu fais et pour qui, puis des liens vers tes pages clés.",
+            "weight": 2
+          },
+          {
+            "id": "no_js_content",
+            "label": "Contenu sans JavaScript",
+            "description": "Le contenu est lisible sans exécuter de JavaScript.",
+            "status": "pass",
+            "status_label": "Réussi",
+            "applicable": true,
+            "message": "412 mots lisibles sans JavaScript.",
+            "fix": null,
+            "weight": 3
+          }
+        ]
+      },
+      {
+        "id": "bot_access",
+        "label": "Contrôle des bots IA",
+        "checks": [
+          {
+            "id": "ai_bot_rules",
+            "label": "Règles pour les robots d’IA",
+            "description": "robots.txt nomme les robots d’IA et dit ce qu’ils peuvent faire.",
+            "status": "fail",
+            "status_label": "À corriger",
+            "applicable": true,
+            "message": "robots.txt ne nomme aucun robot d’IA.",
+            "fix": "Dans robots.txt, ajoute un bloc pour chaque robot d’IA que tu veux autoriser ou bloquer, par exemple User-agent: GPTBot puis Allow: /.",
+            "weight": 3
+          },
+          {
+            "id": "content_signals",
+            "label": "Signaux de contenu",
+            "description": "Lignes Content-Signal qui disent comment l’IA peut utiliser le contenu.",
+            "status": "fail",
+            "status_label": "À corriger",
+            "applicable": true,
+            "message": "Pas de ligne Content-Signal dans robots.txt.",
+            "fix": "Ajoute une ligne Content-Signal dans robots.txt pour dire ce que tu autorises, par exemple Content-Signal: ai-train=no, search=yes, ai-input=yes.",
+            "weight": 2
+          },
+          {
+            "id": "web_bot_auth",
+            "label": "Web Bot Auth",
+            "description": "Annuaire de signatures qui permet de reconnaître les robots légitimes.",
+            "status": "neutral",
+            "status_label": "Facultatif",
+            "applicable": true,
+            "message": "Pas d’annuaire Web Bot Auth (facultatif).",
+            "fix": null,
+            "weight": 0
+          },
+          {
+            "id": "ai_bot_live_access",
+            "label": "Accès réel des robots d’IA",
+            "description": "Le serveur laisse vraiment passer les robots d’IA, sans blocage du pare-feu.",
+            "status": "pass",
+            "status_label": "Réussi",
+            "applicable": true,
+            "message": "GPTBot et ClaudeBot accèdent bien à la page.",
+            "fix": null,
+            "weight": 3
+          }
+        ]
+      }
+    ],
+    "top_fixes": [
+      {
+        "id": "markdown_negotiation",
+        "label": "Version Markdown",
+        "description": "Le site renvoie du Markdown quand un agent le demande.",
+        "status": "fail",
+        "status_label": "À corriger",
+        "applicable": true,
+        "message": "Le site renvoie du HTML quand on demande du Markdown.",
+        "fix": "Propose une version Markdown de tes pages publiques : renvoie du text/markdown quand la requête contient Accept: text/markdown, et rends la même page disponible avec le suffixe .md.",
+        "weight": 3
+      },
+      {
+        "id": "ai_bot_rules",
+        "label": "Règles pour les robots d’IA",
+        "description": "robots.txt nomme les robots d’IA et dit ce qu’ils peuvent faire.",
+        "status": "fail",
+        "status_label": "À corriger",
+        "applicable": true,
+        "message": "robots.txt ne nomme aucun robot d’IA.",
+        "fix": "Dans robots.txt, ajoute un bloc pour chaque robot d’IA que tu veux autoriser ou bloquer, par exemple User-agent: GPTBot puis Allow: /.",
+        "weight": 3
+      },
+      {
+        "id": "link_headers",
+        "label": "En-têtes Link",
+        "description": "En-têtes HTTP Link qui indiquent aux agents les versions lisibles par une machine.",
+        "status": "fail",
+        "status_label": "À corriger",
+        "applicable": true,
+        "message": "Aucun en-tête Link utile aux agents.",
+        "fix": "Ajoute un en-tête HTTP Link à tes pages publiques pour indiquer aux agents où trouver leurs versions lisibles par une machine.",
+        "weight": 2
+      },
+      {
+        "id": "llms_txt",
+        "label": "llms.txt",
+        "description": "Fichier llms.txt qui résume le site pour les modèles d’IA.",
+        "status": "fail",
+        "status_label": "À corriger",
+        "applicable": true,
+        "message": "/llms.txt répond 404.",
+        "fix": "Publie un fichier /llms.txt en Markdown : un titre H1 avec le nom du site, un paragraphe qui dit ce que tu fais et pour qui, puis des liens vers tes pages clés.",
+        "weight": 2
+      },
+      {
+        "id": "content_signals",
+        "label": "Signaux de contenu",
+        "description": "Lignes Content-Signal qui disent comment l’IA peut utiliser le contenu.",
+        "status": "fail",
+        "status_label": "À corriger",
+        "applicable": true,
+        "message": "Pas de ligne Content-Signal dans robots.txt.",
+        "fix": "Ajoute une ligne Content-Signal dans robots.txt pour dire ce que tu autorises, par exemple Content-Signal: ai-train=no, search=yes, ai-input=yes.",
+        "weight": 2
+      }
+    ]
+  },
+  "passed": [
+    {
+      "axis_label": "SEO technique",
+      "label": "Site servi en HTTPS"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "Pages internes uniques"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "robots.txt n'interdit pas le crawl"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "sitemap.xml trouvé"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "Sitemap déclaré dans robots.txt"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "Balise <title> présente"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "Title bien dimensionné"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "Meta description bien dimensionnée"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "og:image définie"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "Twitter Card optimisée"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "Canonical cohérent"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "Un seul H1 par page"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "Hiérarchie des titres respectée"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "hreflang présent (si multilingue)"
+    },
+    {
+      "axis_label": "SEO technique",
+      "label": "Bots IA autorisés"
+    },
+    {
+      "axis_label": "Performance",
+      "label": "TTFB rapide"
+    },
+    {
+      "axis_label": "Performance",
+      "label": "HTML raisonnable"
+    },
+    {
+      "axis_label": "Performance",
+      "label": "Images dimensionnées (anti-CLS)"
+    },
+    {
+      "axis_label": "Performance",
+      "label": "Score Lighthouse performance correct"
+    },
+    {
+      "axis_label": "Performance",
+      "label": "CLS stable"
+    },
+    {
+      "axis_label": "Performance",
+      "label": "TBT raisonnable"
+    },
+    {
+      "axis_label": "Performance",
+      "label": "Poids total raisonnable"
+    },
+    {
+      "axis_label": "Accessibilité",
+      "label": "Viewport autorise le zoom"
+    },
+    {
+      "axis_label": "Accessibilité",
+      "label": "Attribut lang sur <html>"
+    },
+    {
+      "axis_label": "Accessibilité",
+      "label": "Aucune violation WCAG critique (axe-core)"
+    },
+    {
+      "axis_label": "Accessibilité",
+      "label": "Aucune violation WCAG sérieuse (axe-core)"
+    },
+    {
+      "axis_label": "Accessibilité",
+      "label": "Score Lighthouse accessibilité correct"
+    },
+    {
+      "axis_label": "Conformité légale",
+      "label": "Mentions légales présentes"
+    },
+    {
+      "axis_label": "Conformité légale",
+      "label": "DPO mentionné"
+    },
+    {
+      "axis_label": "Conversion",
+      "label": "Page /pricing dédiée"
+    },
+    {
+      "axis_label": "Conversion",
+      "label": "Témoignages complets"
+    },
+    {
+      "axis_label": "Conversion",
+      "label": "Canal de contact direct"
+    },
+    {
+      "axis_label": "Conversion",
+      "label": "CTA principal contrasté"
+    },
+    {
+      "axis_label": "Conversion",
+      "label": "Proposition de valeur claire"
+    },
+    {
+      "axis_label": "Conversion",
+      "label": "Copywriting étayé"
+    },
+    {
+      "axis_label": "SEO contenu",
+      "label": "Blog hébergé sur le domaine principal"
+    },
+    {
+      "axis_label": "SEO contenu",
+      "label": "Contenu home suffisant"
+    },
+    {
+      "axis_label": "SEO contenu",
+      "label": "Lisibilité correcte"
+    },
+    {
+      "axis_label": "UX",
+      "label": "Viewport mobile configuré"
+    },
+    {
+      "axis_label": "UX",
+      "label": "Navigation principale présente"
+    },
+    {
+      "axis_label": "UX",
+      "label": "Navigation lisible"
+    },
+    {
+      "axis_label": "UX",
+      "label": "Aucune friction UX visible"
+    },
+    {
+      "axis_label": "UI",
+      "label": "Styles inline raisonnables"
+    },
+    {
+      "axis_label": "UI",
+      "label": "Nombre de polices raisonnable"
+    },
+    {
+      "axis_label": "UI",
+      "label": "Hero clair"
+    },
+    {
+      "axis_label": "UI",
+      "label": "Hiérarchie visuelle nette"
+    },
+    {
+      "axis_label": "UI",
+      "label": "Design au niveau du secteur"
+    },
+    {
+      "axis_label": "UI",
+      "label": "Identité visuelle cohérente"
+    }
+  ],
+  "agency": {
+    "name": "Atelier Pixel",
+    "initial": "A",
+    "website_url": "https://atelier-pixel.fr",
+    "website_host": "atelier-pixel.fr",
+    "contact_url": "https://atelier-pixel.fr/contact",
+    "logo_url": null,
+    "color": "#7c3aed",
+    "color_text": "#7c3aed",
+    "color_adjusted": false,
+    "on_color": "#ffffff",
+    "footer": "Atelier Pixel, studio web à Lyon. 12 rue des Capucins, 69001 Lyon."
+  },
+  "links": {
+    "share_url": "https://audit.atelier-pixel.fr/r/exempleDeJeton0123456789",
+    "pdf_url": "/api/audits/full/ex4mpleSlug01/pdf"
+  },
+  "tracking": {
+    "enabled": true,
+    "notice": "Atelier Pixel sait si tu as ouvert ce rapport, rien de plus."
+  },
+  "texts": {
+    "intro": null,
+    "cta_title": "On s’en occupe ?",
+    "cta_text": "Atelier Pixel peut prendre en charge les priorités de ce rapport. Un échange de 20 minutes suffit pour cadrer.",
+    "cta_label": "Réserver un appel de 20 minutes",
+    "footer": "Atelier Pixel, studio web à Lyon. 12 rue des Capucins, 69001 Lyon.",
+    "disclaimer": "Rapport automatisé, à titre indicatif. Les estimations sont à confirmer avec tes données réelles."
+  },
+  "sections": [
+    {
+      "id": "cost",
+      "label": "Chiffrage",
+      "enabled": true
+    },
+    {
+      "id": "priorities",
+      "label": "Top 3 priorités",
+      "enabled": true
+    },
+    {
+      "id": "summary",
+      "label": "Résumé exécutif",
+      "enabled": true
+    },
+    {
+      "id": "axes",
+      "label": "Scores par axe",
+      "enabled": true
+    },
+    {
+      "id": "ai",
+      "label": "Préparation IA",
+      "enabled": true
+    },
+    {
+      "id": "issues",
+      "label": "Problèmes par axe",
+      "enabled": true
+    },
+    {
+      "id": "passed",
+      "label": "Ce qui va bien",
+      "enabled": true
+    },
+    {
+      "id": "cta",
+      "label": "Appel à l’action",
+      "enabled": true
+    }
+  ],
+  "settings": {
+    "intro": "",
+    "cta_title": "On s’en occupe ?",
+    "cta_text": "",
+    "cta_label": "Réserver un appel de 20 minutes",
+    "offer": "",
+    "footer_text": "",
+    "open_issues": "all",
+    "show_code": true,
+    "show_hero": false,
+    "density": "airy",
+    "pdf_cover": true,
+    "heading_font": "source-serif-4",
+    "body_font": "inherit"
+  },
+  "template": {
+    "id": "minimal",
+    "name": "Minimaliste",
+    "version": "2.0.0"
+  }
+}

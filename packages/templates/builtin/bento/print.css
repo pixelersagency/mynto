@@ -1,0 +1,183 @@
+/* PDF (A4, 16 mm margins set by the engine). White page: the grey ground
+   goes, cards keep a thin outline instead. Sections are open in print mode. */
+& {
+  background: #ffffff;
+  padding: 0;
+  font-size: 9.5pt;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  --b-gap: 3mm;
+  --b-radius: 4mm;
+}
+.mr-page {
+  max-width: none;
+}
+.mr-card,
+.mr-section,
+.mr-plan__step,
+.mr-ai__card,
+.mr-ai__fixes,
+.mr-ai__tests {
+  padding: 5mm;
+  border: 0.3mm solid var(--b-line);
+}
+.mr-plan-section,
+.mr-ai,
+.mr-issues {
+  border: 0;
+  padding: 0;
+}
+.mr-actions,
+.mr-tracking {
+  display: none;
+}
+.mr-hero__main {
+  min-height: 0;
+  padding: 6mm;
+  gap: 6mm;
+}
+.mr-title {
+  font-size: 22pt;
+}
+.mr-score__num {
+  font-size: 60pt;
+}
+.mr-radar__svg {
+  max-width: 70mm;
+}
+.mr-hero__days {
+  font-size: 26pt;
+}
+.mr-hero__impact,
+.mr-diag {
+  font-size: 10pt;
+}
+.mr-ai__num {
+  font-size: 34pt;
+}
+.mr-tile__value {
+  font-size: 18pt;
+}
+.mr-code pre {
+  max-height: none;
+  overflow: visible;
+  background: #f4f4f5;
+  color: var(--b-ink);
+  font-size: 8pt;
+}
+.mr-cta {
+  background: #ffffff;
+  color: var(--b-ink);
+  border: 0.5mm solid var(--b-ink);
+}
+.mr-cta__text p {
+  color: var(--b-muted);
+}
+.mr-cta .mr-btn--primary {
+  background: none;
+  color: var(--b-ink);
+  min-height: 0;
+  padding: 0;
+  font-weight: 800;
+}
+.mr-group__summary::before {
+  display: none;
+}
+.mr-hero__main,
+.mr-hero__radar,
+.mr-hero__brief,
+.mr-hero__cost,
+.mr-plan__step,
+.mr-tile,
+.mr-ai__card,
+.mr-fix,
+.mr-test,
+.mr-finding,
+.mr-cta,
+.mr-privacy {
+  break-inside: avoid;
+}
+.mr-h2,
+.mr-h3,
+.mr-h4,
+.mr-group__summary {
+  break-after: avoid;
+}
+a[href^='http']::after {
+  content: ' (' attr(href) ')';
+  font-size: 7.5pt;
+  font-weight: 400;
+  color: var(--b-muted);
+  overflow-wrap: anywhere;
+}
+a.mr-brand__name::after,
+.mr-facts a::after,
+.mr-plan__links a::after {
+  content: none;
+}
+
+/* Cover page */
+.mr-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 250mm;
+  padding: 10mm;
+  border-radius: 6mm;
+  background: var(--b-ground);
+  break-after: page;
+}
+.mr-cover__brand {
+  font-size: 12pt;
+  font-weight: 800;
+}
+.mr-cover__logo {
+  height: 12mm;
+  width: auto;
+  max-width: 70mm;
+  object-fit: contain;
+}
+.mr-cover__body {
+  padding: 10mm;
+  border-radius: 5mm;
+  background: #ffffff;
+}
+.mr-cover__kicker {
+  font-size: 9pt;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--b-muted);
+}
+.mr-cover__title {
+  margin-top: 3mm;
+  font-family: var(--mr-font-heading);
+  font-size: 34pt;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+.mr-cover__url {
+  margin-top: 3mm;
+  color: var(--b-muted);
+  overflow-wrap: anywhere;
+}
+.mr-cover__score {
+  margin-top: 12mm;
+}
+.mr-cover__num {
+  font-family: var(--mr-font-heading);
+  font-size: 64pt;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+.mr-cover__of {
+  font-weight: 700;
+  color: var(--b-muted);
+}
+.mr-cover__date {
+  font-weight: 700;
+  color: var(--b-muted);
+}

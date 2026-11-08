@@ -1,0 +1,5 @@
+{% if tracking.enabled and mode == 'web' %}<p class="mr-tracking">{{ tracking.notice }} <a href="#confidentialite">En savoir plus</a></p>{% endif %}
+<header class="mr-header">
+  <p class="mr-brand">{% if agency.logo_url %}<img class="mr-brand__logo" src="{{ agency.logo_url }}" alt="" width="24" height="24">{% else %}<span class="mr-brand__mark" aria-hidden="true"></span>{% endif %}{% if agency.website_url %}<a class="mr-brand__name" href="{{ agency.website_url }}">{{ agency.name }}</a>{% else %}<span class="mr-brand__name">{{ agency.name }}</span>{% endif %}</p>
+  <p class="mr-header__meta">Audit web · <time datetime="{{ audit.created_at }}">{{ audit.created_label }}</time></p>
+</header>

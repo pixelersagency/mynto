@@ -1,0 +1,55 @@
+# Webhooks vers un n8n auto-hébergé, sans passer par Internet.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.n8n.yml up -d
+#
+# Le scanner (qui envoie les webhooks) et le web (qui les valide quand tu
+# les enregistres) rejoignent un réseau dédié « n8n », partagé avec ton
+# conteneur n8n et rien d'autre. WEBHOOKS_ALLOW_PRIVATE=1 lève la garde
+# SSRF des webhooks (adresses privées et http:// acceptés) : c'est pour ça
+# qu'on la limite à ce réseau plutôt qu'à l'hôte. URL à saisir dans
+# Réglages > Webhooks : http://n8n:5678/webhook/<id>
+#
+# Avant le premier lancement : docker network create n8n
+# Puis deux cas :
+#   - n8n tourne déjà dans un autre projet compose : ajoute le réseau
+#     externe « n8n » à ton service n8n ;
+#   - pas encore de n8n : ajoute --profile n8n pour en démarrer un ici
+#     (interface sur http://127.0.0.1:5678).
+#
+# Voir docs/webhooks.md (risques de WEBHOOKS_ALLOW_PRIVATE).
+
+services:
+  scanner:
+    environment:
+      WEBHOOKS_ALLOW_PRIVATE: '1'
+    networks:
+      - n8n
+
+  web:
+    environment:
+      WEBHOOKS_ALLOW_PRIVATE: '1'
+    networks:
+      - n8n
+
+  n8n:
+    profiles: ['n8n']
+    # Épingle une version (N8N_VERSION) en production.
+    image: n8nio/n8n:${N8N_VERSION:-latest}
+    restart: unless-stopped
+    environment:
+      N8N_SECURE_COOKIE: 'false'
+      GENERIC_TIMEZONE: Europe/Paris
+    ports:
+      - '127.0.0.1:${N8N_PORT:-5678}:5678'
+    volumes:
+      - n8n-data:/home/node/.n8n
+    networks:
+      - n8n
+
+networks:
+  n8n:
+    name: ${N8N_NETWORK:-n8n}
+    external: true
+
+volumes:
+  n8n-data:

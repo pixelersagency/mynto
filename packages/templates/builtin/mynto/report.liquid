@@ -1,0 +1,17 @@
+{% assign show_issues = false %}{% assign show_ai = false %}{% for s in sections %}{% if s.enabled %}{% if s.id == 'issues' %}{% assign show_issues = true %}{% elsif s.id == 'ai' %}{% assign show_ai = true %}{% endif %}{% endif %}{% endfor %}
+<div class="mr-page" data-density="{{ settings.density }}" data-accent="{{ settings.accent }}">
+{% include 'sections/cover' %}
+{% include 'sections/header' %}
+{% include 'sections/hero' %}
+{% for section in sections %}{% if section.enabled %}{% case section.id %}
+{% when 'cost' %}{% include 'sections/cost' %}
+{% when 'priorities' %}{% include 'sections/plan' %}
+{% when 'summary' %}{% include 'sections/diagnostic' %}
+{% when 'axes' %}{% include 'sections/axes' %}
+{% when 'ai' %}{% include 'sections/ai' %}
+{% when 'issues' %}{% include 'sections/issues' %}
+{% when 'passed' %}{% include 'sections/passed' %}
+{% when 'cta' %}{% include 'sections/cta' %}
+{% endcase %}{% endif %}{% endfor %}
+{% include 'sections/footer' %}
+</div>

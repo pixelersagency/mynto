@@ -1,0 +1,18 @@
+<section class="mr-section mr-issues" aria-labelledby="mr-issues-title">
+  <h2 id="mr-issues-title" class="mr-h2"><span class="mr-tag">Problèmes</span> <span class="mr-h2__title">{% if counts.total == 0 %}Aucun problème relevé{% else %}{{ counts.total }} {{ counts.total | plural: 'problème', 'problèmes' }}, <span class="mr-h2__soft">axe par axe</span>{% endif %}</span></h2>
+  {% if counts.total > 0 %}<p class="mr-counts">{{ counts.P0 }} {{ counts.P0 | plural: 'critique', 'critiques' }}, {{ counts.P1 }} {{ counts.P1 | plural: 'important', 'importants' }}, {{ counts.P2 }} à améliorer{% if counts.P3 > 0 %}, {{ counts.P3 }} {{ counts.P3 | plural: 'détail', 'détails' }}{% endif %}.</p>{% endif %}
+  {% assign clean_axes = '' %}{% assign off_axes = '' %}
+  {% for a in axes %}
+  {% if a.findings.size > 0 %}
+  <details class="mr-group" id="{{ a.anchor }}"{% if a.open_by_default %} open{% endif %}>
+    <summary class="mr-group__summary"><span class="mr-group__name">{{ a.label }}</span> <span class="mr-group__meta">{% if a.evaluated %}{{ a.score.value }}/100, {% endif %}{{ a.findings_count }} {{ a.findings_count | plural: 'problème', 'problèmes' }}{% if a.p0_count > 0 %}, dont {{ a.p0_count }} {{ a.p0_count | plural: 'critique', 'critiques' }}{% endif %}</span></summary>
+    <div class="mr-group__body">
+      {% for f in a.findings %}{% include 'sections/finding' %}{% endfor %}
+    </div>
+  </details>
+  {% elsif a.evaluated %}{% assign clean_axes = clean_axes | append: ', ' | append: a.label %}
+  {% else %}{% assign off_axes = off_axes | append: ', ' | append: a.label %}
+  {% endif %}
+  {% endfor %}
+  {% if clean_axes != '' or off_axes != '' %}<p class="mr-note mr-issues__rest">{% if clean_axes != '' %}Aucun problème relevé : {{ clean_axes | remove_first: ', ' }}.{% endif %}{% if off_axes != '' %} Non évalué pour cet audit : {{ off_axes | remove_first: ', ' }}.{% endif %}</p>{% endif %}
+</section>

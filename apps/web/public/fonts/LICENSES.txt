@@ -1,0 +1,10 @@
+Fonts bundled from @fontsource packages (latin subset, woff2). SIL Open Font License 1.1.
+inter: OFL-1.1 (https://fontsource.org/fonts/inter), see inter.LICENSE.txt
+plus-jakarta-sans: OFL-1.1 (https://fontsource.org/fonts/plus-jakarta-sans), see plus-jakarta-sans.LICENSE.txt
+manrope: OFL-1.1 (https://fontsource.org/fonts/manrope), see manrope.LICENSE.txt
+dm-sans: OFL-1.1 (https://fontsource.org/fonts/dm-sans), see dm-sans.LICENSE.txt
+ibm-plex-sans: OFL-1.1 (https://fontsource.org/fonts/ibm-plex-sans), see ibm-plex-sans.LICENSE.txt
+source-serif-4: OFL-1.1 (https://fontsource.org/fonts/source-serif-4), see source-serif-4.LICENSE.txt
+fraunces: OFL-1.1 (https://fontsource.org/fonts/fraunces), see fraunces.LICENSE.txt
+merriweather: OFL-1.1 (https://fontsource.org/fonts/merriweather), see merriweather.LICENSE.txt
+newsreader: OFL-1.1 (https://fontsource.org/fonts/newsreader), see newsreader.LICENSE.txt

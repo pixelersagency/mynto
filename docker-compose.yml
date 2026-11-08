@@ -1,0 +1,153 @@
+# mynto : installation complète en une commande.
+#
+#   cp .env.example .env      # ou : pnpm run setup (génère les secrets)
+#   docker compose up -d
+#
+# Services : web (seul exposé), scanner (API interne + workers + Chromium),
+# postgres 16, redis 7. Les migrations sont appliquées par le scanner à son
+# démarrage (verrou consultatif : plusieurs scanners peuvent démarrer en
+# même temps). Toutes les variables sont documentées dans .env.example.
+#
+# Webhooks vers un n8n auto-hébergé : voir docker-compose.n8n.yml.
+# Développement local : voir docker-compose.override.example.yml.
+
+name: mynto
+
+x-app-env: &app-env # Câblage interne, écrase ce que .env pourrait contenir pour ces clés.
+  DATABASE_URL: postgres://mynto:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD manquante dans .env}@postgres:5432/mynto
+  REDIS_URL: redis://redis:6379
+  MEDIA_DIR: /data/media
+  NODE_ENV: production
+
+services:
+  web:
+    image: ${MYNTO_IMAGE_REGISTRY:-mynto}/web:${MYNTO_VERSION:-latest}
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 15s
+    env_file: .env
+    environment:
+      <<: *app-env
+      SCANNER_API_URL: http://scanner:4000
+    ports:
+      # 127.0.0.1 par défaut : un reverse proxy (Caddy, Traefik, nginx) sur
+      # la même machine termine le HTTPS. MYNTO_BIND=0.0.0.0 pour exposer
+      # directement le port (déconseillé sans HTTPS).
+      - '${MYNTO_BIND:-127.0.0.1}:${MYNTO_PORT:-3000}:3000'
+    volumes:
+      - media:/data/media
+    depends_on:
+      scanner:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - internal
+      - egress
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  scanner:
+    image: ${MYNTO_IMAGE_REGISTRY:-mynto}/scanner:${MYNTO_VERSION:-latest}
+    build:
+      context: .
+      dockerfile: apps/scanner/Dockerfile
+    restart: unless-stopped
+    init: true
+    # Le scanner sort de lui-même après SHUTDOWN_TIMEOUT_MS (8 s par défaut).
+    stop_grace_period: 15s
+    env_file: .env
+    environment:
+      <<: *app-env
+      PORT: '4000'
+      WEB_BASE_URL: http://web:3000
+      DB_MIGRATE_ON_START: '1'
+    # Chromium a besoin de plus que les 64 Mo de /dev/shm par défaut.
+    shm_size: 1gb
+    volumes:
+      - media:/data/media
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - internal
+      - egress
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:4000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mynto
+      POSTGRES_USER: mynto
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD manquante dans .env}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - internal
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U mynto -d mynto']
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 20s
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    # AOF + instantanés : les files BullMQ survivent à un redémarrage.
+    # noeviction : Redis ne jette jamais un job pour faire de la place.
+    command:
+      - redis-server
+      - --appendonly
+      - 'yes'
+      - --save
+      - '300 10'
+      - --maxmemory-policy
+      - noeviction
+    volumes:
+      - redis-data:/data
+    networks:
+      - internal
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+networks:
+  # Postgres et Redis : aucune sortie vers Internet, aucun port publié.
+  internal:
+    internal: true
+  # Sortie Internet du web (fournisseurs IA, SMTP) et du scanner (audits).
+  egress: {}
+
+volumes:
+  postgres-data:
+  redis-data:
+  # Captures, favicons, logo de l'agence, polices : partagé web + scanner.
+  media:

@@ -1,0 +1,16 @@
+<article class="mr-finding mr-finding--{{ f.severity }}" id="{{ f.anchor }}">
+  <p class="mr-finding__tag"><span class="mr-sev mr-sev--{{ f.severity }}">{{ f.severity_label }}</span> <span class="mr-finding__axis">· {{ f.axis_label }}{% if f.effort_label %} · effort {{ f.effort_label | downcase }}{% endif %}</span></p>
+  <h3 class="mr-finding__title">{{ f.title }}</h3>
+  <dl class="mr-finding__body">
+    {% if f.constat %}<div><dt>Constat</dt><dd>{{ f.constat }}</dd></div>{% endif %}
+    {% if f.impact %}<div><dt>Enjeu</dt><dd>{{ f.impact }}</dd></div>{% endif %}
+    {% if f.recommendation %}<div class="mr-finding__reco"><dt>À faire</dt><dd>{{ f.recommendation }}</dd></div>{% endif %}
+  </dl>
+  {% if f.code %}<div class="mr-code"><p class="mr-code__label">Extrait de code</p><pre tabindex="0" role="region" aria-label="Extrait de code : {{ f.title }}"><code>{{ f.code }}</code></pre></div>{% endif %}
+  {% if f.legal_refs.size > 0 or f.urls.size > 0 %}
+  <div class="mr-finding__foot">
+    {% if f.legal_refs.size > 0 %}<ul class="mr-refs" aria-label="Références">{% for r in f.legal_refs %}<li>{% if r.url %}<a href="{{ r.url }}">{{ r.label }}</a>{% else %}{{ r.label }}{% endif %}</li>{% endfor %}</ul>{% endif %}
+    {% if f.urls.size > 0 %}<ul class="mr-urls" aria-label="Pages concernées">{% for u in f.urls %}<li>{{ u }}</li>{% endfor %}{% if f.urls_more > 0 %}<li>et {{ f.urls_more }} {{ f.urls_more | plural: 'autre', 'autres' }}</li>{% endif %}</ul>{% endif %}
+  </div>
+  {% endif %}
+</article>

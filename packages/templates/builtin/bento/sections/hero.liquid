@@ -1,0 +1,29 @@
+<section class="mr-hero" aria-labelledby="mr-title">
+  <div class="mr-card mr-hero__main">
+    <div>
+      <p class="mr-hero__site">{{ audit.host }}</p>
+      <h1 id="mr-title" class="mr-title">{% include 'sections/headline' %}</h1>
+      {% if texts.intro %}<p class="mr-intro">{{ texts.intro }}</p>{% endif %}
+    </div>
+    <div class="mr-score">
+      {% if score.value != nil %}<p class="mr-score__num"><span class="mr-visually-hidden">Score global : </span>{{ score.value }}<span class="mr-score__of"><span aria-hidden="true">/100</span><span class="mr-visually-hidden"> sur 100</span></span></p>{% else %}<p class="mr-score__num mr-score__num--off"><span aria-hidden="true">–</span><span class="mr-visually-hidden">Score global non évalué</span></p>{% endif %}
+      <p class="mr-score__meta">{% if score.value != nil %}<span class="mr-band mr-band--{{ score.band }}">{{ score.band_label }}</span> · {% include 'sections/oneliner' %}{% else %}Score global non évalué.{% endif %}</p>
+    </div>
+    {% if score.partial and score.value != nil %}<p class="mr-note">Calculé sur {{ score.evaluated_axes }} axes sur {{ score.total_axes }}.</p>{% endif %}
+  </div>
+  <div class="mr-card mr-hero__radar">{% include 'sections/radar' %}</div>
+  <div class="mr-card mr-hero__brief{% if cost == nil %} mr-hero__brief--wide{% endif %}">
+    {% if summary.impact %}<h2 class="mr-kicker">En bref</h2><p class="mr-hero__impact">{{ summary.impact }}</p>{% endif %}
+    {% include 'sections/actions' %}
+    {% include 'sections/facts' %}
+  </div>
+  {% if cost %}
+  <div class="mr-card mr-hero__cost">
+    <h2 class="mr-kicker">Corriger l’essentiel</h2>
+    <p class="mr-hero__days">{{ cost.days_label }}</p>
+    <p class="mr-hero__amount">{{ cost.amount_label }}</p>
+    <p class="mr-hero__rate">{{ cost.daily_rate_label }} · {{ cost.items_count }} {{ cost.items_count | plural: 'correction chiffrée', 'corrections chiffrées' }}</p>
+    {% if cost.verdict_label %}<p class="mr-hero__verdict">{{ cost.verdict_label }}</p>{% endif %}
+  </div>
+  {% endif %}
+</section>

@@ -1,0 +1,48 @@
+name: Bug
+description: Quelque chose ne marche pas comme prévu / Something does not work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de prendre le temps de signaler ce bug. **Pas de faille de sécurité ici** : voir SECURITY.md.
+        Ne colle aucun secret (clé, jeton, mot de passe) ni donnée de prospect.
+  - type: textarea
+    id: what
+    attributes:
+      label: Ce qui se passe / What happens
+      description: Décris le problème et ce que tu attendais.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Étapes pour reproduire / Steps to reproduce
+      placeholder: |
+        1. ...
+        2. ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version (tag ou commit)
+      placeholder: v0.1.0 ou abc1234
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Installation
+      options:
+        - Docker Compose
+        - Manuelle (pnpm)
+        - Autre
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Journaux utiles / Relevant logs
+      description: Par exemple `docker compose logs web scanner`. Retire tout secret.
+      render: shell

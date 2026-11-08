@@ -1,0 +1,93 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+.next/
+dist/
+build/
+out/
+.turbo/
+*.tsbuildinfo
+
+# Environment variables - CRITIQUE
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+*.env
+# Exception : .env.example est committé
+
+# Service account keys - CRITIQUE, jamais committé
+*-service-account*.json
+gsc-*.json
+n8n-perso-*.json
+*.iam.gserviceaccount.com.json
+!.env.example
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/settings.json.example
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+results/
+
+# Claude Code
+.claude/cache/
+.claude/.history/
+CLAUDE.local.md
+
+# Secrets et clés
+*.pem
+*.p12
+*.key
+id_rsa
+id_ed25519
+
+# Temp files
+*.tmp
+tmp/
+.DS_Store
+
+# Scanner artifacts
+apps/scanner/screenshots/
+apps/scanner/traces/
+
+# Playwright MCP artifacts (root-level screenshots/snapshots)
+.playwright-mcp/
+
+
+# Scratch screenshots root
+/*.png
+
+# GCP service account keys
+/*-compute@*.json
+/n8n-perso-*.json
+
+# OAuth client secrets (Chrome Web Store publish, etc.)
+/client_secret_*.json
+# Templates created with pnpm template:new (import them in the dashboard or with the MCP tool save_template)
+/templates/
+
+# Local docker compose overrides
+docker-compose.override.yml

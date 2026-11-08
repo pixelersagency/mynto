@@ -1,0 +1,1284 @@
+{
+  "$id": "https://mynto.fr/schemas/report-data.v1.json",
+  "title": "Mynto report-data v1",
+  "description": "Data passed to a report template. Scores are integers on 100. Every key is always present.",
+  "$ref": "#/definitions/ReportDataV1",
+  "definitions": {
+    "ReportDataV1": {
+      "type": "object",
+      "properties": {
+        "contract": {
+          "type": "string",
+          "const": "report-data"
+        },
+        "version": {
+          "type": "number",
+          "const": 1
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "web",
+            "print"
+          ],
+          "description": "`print` for the PDF: sections are expanded."
+        },
+        "generated_at": {
+          "type": "string"
+        },
+        "audit": {
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "host": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string",
+              "description": "Readable site name (label or host)."
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "created_label": {
+              "type": "string",
+              "description": "« 6 novembre 2026 »."
+            },
+            "expires_at": {
+              "type": "string"
+            },
+            "expires_label": {
+              "type": "string"
+            },
+            "sector": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "main_kpi": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "stack": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "hero_image_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "favicon_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "pages_analyzed": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "llm_assisted": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "slug",
+            "url",
+            "host",
+            "name",
+            "created_at",
+            "created_label",
+            "expires_at",
+            "expires_label",
+            "sector",
+            "main_kpi",
+            "stack",
+            "hero_image_url",
+            "favicon_url",
+            "pages_analyzed",
+            "llm_assisted"
+          ],
+          "additionalProperties": false
+        },
+        "score": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Score on 100, null when not evaluated."
+            },
+            "band": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "good",
+                    "fair",
+                    "poor"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "band_label": {
+              "type": "string",
+              "description": "« Bon », « À améliorer », « Critique » or « Non évalué »."
+            },
+            "evaluated_axes": {
+              "type": "integer"
+            },
+            "total_axes": {
+              "type": "integer"
+            },
+            "partial": {
+              "type": "boolean",
+              "description": "True when some axes were not evaluated."
+            },
+            "ai_included": {
+              "type": "boolean",
+              "description": "True when Préparation IA counts in the global score."
+            }
+          },
+          "required": [
+            "value",
+            "band",
+            "band_label",
+            "evaluated_axes",
+            "total_axes",
+            "partial",
+            "ai_included"
+          ],
+          "additionalProperties": false
+        },
+        "counts": {
+          "type": "object",
+          "properties": {
+            "P0": {
+              "type": "integer"
+            },
+            "P1": {
+              "type": "integer"
+            },
+            "P2": {
+              "type": "integer"
+            },
+            "P3": {
+              "type": "integer"
+            },
+            "total": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "P0",
+            "P1",
+            "P2",
+            "P3",
+            "total"
+          ],
+          "additionalProperties": false
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "impact": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "text",
+            "impact"
+          ],
+          "additionalProperties": false
+        },
+        "priorities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rank": {
+                "type": "integer"
+              },
+              "title": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "expected_outcome": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "findings": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "anchor": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "severity": {
+                      "type": "string",
+                      "enum": [
+                        "P0",
+                        "P1",
+                        "P2",
+                        "P3"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "anchor",
+                    "title",
+                    "severity"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "rank",
+              "title",
+              "reason",
+              "expected_outcome",
+              "findings"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "quick_wins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cost": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "days": {
+                  "type": "number"
+                },
+                "days_label": {
+                  "type": "string",
+                  "description": "« 4,5 jours »."
+                },
+                "amount_low": {
+                  "type": "number"
+                },
+                "amount_high": {
+                  "type": "number"
+                },
+                "amount_label": {
+                  "type": "string",
+                  "description": "« 2 700 € à 3 300 € HT »."
+                },
+                "daily_rate": {
+                  "type": "number"
+                },
+                "daily_rate_label": {
+                  "type": "string"
+                },
+                "items_count": {
+                  "type": "integer"
+                },
+                "verdict": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "correction_or_redesign",
+                        "redesign_only"
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "verdict_label": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "redesign_reasons": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "disclaimer": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "days",
+                "days_label",
+                "amount_low",
+                "amount_high",
+                "amount_label",
+                "daily_rate",
+                "daily_rate_label",
+                "items_count",
+                "verdict",
+                "verdict_label",
+                "redesign_reasons",
+                "disclaimer"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Time-to-fix estimate, null when absent."
+        },
+        "axes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "short": {
+                "type": "string"
+              },
+              "anchor": {
+                "type": "string"
+              },
+              "evaluated": {
+                "type": "boolean",
+                "description": "False when the module was off: show « Non évalué », never 0."
+              },
+              "score": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 100
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "Score on 100, null when not evaluated."
+                  },
+                  "band": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          "good",
+                          "fair",
+                          "poor"
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "band_label": {
+                    "type": "string",
+                    "description": "« Bon », « À améliorer », « Critique » or « Non évalué »."
+                  }
+                },
+                "required": [
+                  "value",
+                  "band",
+                  "band_label"
+                ],
+                "additionalProperties": false
+              },
+              "findings_count": {
+                "type": "integer"
+              },
+              "p0_count": {
+                "type": "integer"
+              },
+              "open_by_default": {
+                "type": "boolean",
+                "description": "Section open on the web (P0 inside, or template setting)."
+              },
+              "findings": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "anchor": {
+                      "type": "string",
+                      "description": "HTML id of the finding, unique in the report."
+                    },
+                    "axis": {
+                      "type": "string"
+                    },
+                    "axis_label": {
+                      "type": "string"
+                    },
+                    "severity": {
+                      "type": "string",
+                      "enum": [
+                        "P0",
+                        "P1",
+                        "P2",
+                        "P3"
+                      ]
+                    },
+                    "severity_label": {
+                      "type": "string",
+                      "description": "« Critique », « Important », « À améliorer », « Détail »."
+                    },
+                    "effort": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "enum": [
+                            "quick_win",
+                            "standard",
+                            "important"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "effort_label": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "constat": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "What was observed on the site."
+                    },
+                    "impact": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Why it matters for the business."
+                    },
+                    "recommendation": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "code": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Code snippet, shown in a collapsible block."
+                    },
+                    "legal_refs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "label",
+                          "url"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "urls": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Affected URLs (at most 10)."
+                    },
+                    "urls_more": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "description": "Affected URLs not listed."
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "anchor",
+                    "axis",
+                    "axis_label",
+                    "severity",
+                    "severity_label",
+                    "effort",
+                    "effort_label",
+                    "title",
+                    "constat",
+                    "impact",
+                    "recommendation",
+                    "code",
+                    "legal_refs",
+                    "urls",
+                    "urls_more"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "passed": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Checks of this axis that passed."
+              }
+            },
+            "required": [
+              "id",
+              "label",
+              "short",
+              "anchor",
+              "evaluated",
+              "score",
+              "findings_count",
+              "p0_count",
+              "open_by_default",
+              "findings",
+              "passed"
+            ],
+            "additionalProperties": false
+          },
+          "description": "The 8 axes, in report order."
+        },
+        "top_issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "anchor": {
+                "type": "string",
+                "description": "HTML id of the finding, unique in the report."
+              },
+              "axis": {
+                "type": "string"
+              },
+              "axis_label": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "P0",
+                  "P1",
+                  "P2",
+                  "P3"
+                ]
+              },
+              "severity_label": {
+                "type": "string",
+                "description": "« Critique », « Important », « À améliorer », « Détail »."
+              },
+              "effort": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "enum": [
+                      "quick_win",
+                      "standard",
+                      "important"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "effort_label": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "title": {
+                "type": "string"
+              },
+              "constat": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "What was observed on the site."
+              },
+              "impact": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Why it matters for the business."
+              },
+              "recommendation": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "code": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Code snippet, shown in a collapsible block."
+              },
+              "legal_refs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "label",
+                    "url"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "urls": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Affected URLs (at most 10)."
+              },
+              "urls_more": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Affected URLs not listed."
+              }
+            },
+            "required": [
+              "id",
+              "anchor",
+              "axis",
+              "axis_label",
+              "severity",
+              "severity_label",
+              "effort",
+              "effort_label",
+              "title",
+              "constat",
+              "impact",
+              "recommendation",
+              "code",
+              "legal_refs",
+              "urls",
+              "urls_more"
+            ],
+            "additionalProperties": false
+          },
+          "description": "P0 and P1 findings, at most 6."
+        },
+        "ai": {
+          "type": "object",
+          "properties": {
+            "evaluated": {
+              "type": "boolean",
+              "description": "False when the module was off for this audit."
+            },
+            "failed": {
+              "type": "boolean",
+              "description": "True when the site could not be reached: no score."
+            },
+            "score": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "anyOf": [
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "Score on 100, null when not evaluated."
+                },
+                "band": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "good",
+                        "fair",
+                        "poor"
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "band_label": {
+                  "type": "string",
+                  "description": "« Bon », « À améliorer », « Critique » or « Non évalué »."
+                }
+              },
+              "required": [
+                "value",
+                "band",
+                "band_label"
+              ],
+              "additionalProperties": false
+            },
+            "anchor": {
+              "type": "string"
+            },
+            "level": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "level_name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "max_level": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "site_type_label": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "site_type_auto": {
+              "type": "boolean"
+            },
+            "included_in_global_score": {
+              "type": "boolean"
+            },
+            "counts": {
+              "type": "object",
+              "properties": {
+                "pass": {
+                  "type": "integer"
+                },
+                "fail": {
+                  "type": "integer"
+                },
+                "other": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "pass",
+                "fail",
+                "other"
+              ],
+              "additionalProperties": false
+            },
+            "categories": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "checks": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "label": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "pass",
+                            "fail",
+                            "neutral",
+                            "skipped"
+                          ]
+                        },
+                        "status_label": {
+                          "type": "string"
+                        },
+                        "applicable": {
+                          "type": "boolean"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "fix": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "weight": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "label",
+                        "description",
+                        "status",
+                        "status_label",
+                        "applicable",
+                        "message",
+                        "fix",
+                        "weight"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "id",
+                  "label",
+                  "checks"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "top_fixes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "neutral",
+                      "skipped"
+                    ]
+                  },
+                  "status_label": {
+                    "type": "string"
+                  },
+                  "applicable": {
+                    "type": "boolean"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "fix": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "weight": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "id",
+                  "label",
+                  "description",
+                  "status",
+                  "status_label",
+                  "applicable",
+                  "message",
+                  "fix",
+                  "weight"
+                ],
+                "additionalProperties": false
+              },
+              "description": "Failed applicable checks, heaviest first (max 5)."
+            }
+          },
+          "required": [
+            "evaluated",
+            "failed",
+            "score",
+            "anchor",
+            "level",
+            "level_name",
+            "max_level",
+            "site_type_label",
+            "site_type_auto",
+            "included_in_global_score",
+            "counts",
+            "categories",
+            "top_fixes"
+          ],
+          "additionalProperties": false
+        },
+        "passed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "axis_label": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "axis_label",
+              "label"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "agency": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "website_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "website_host": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "contact_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "logo_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "color": {
+              "type": "string",
+              "description": "Brand color as chosen (#RRGGBB)."
+            },
+            "color_text": {
+              "type": "string",
+              "description": "Brand color darkened when needed so text and links reach 4.5:1 on white."
+            },
+            "color_adjusted": {
+              "type": "boolean"
+            },
+            "on_color": {
+              "type": "string",
+              "description": "Readable text color on a brand-colored background."
+            },
+            "footer": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "name",
+            "initial",
+            "website_url",
+            "website_host",
+            "contact_url",
+            "logo_url",
+            "color",
+            "color_text",
+            "color_adjusted",
+            "on_color",
+            "footer"
+          ],
+          "additionalProperties": false
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "share_url": {
+              "type": "string",
+              "description": "Link to give: the /r/ tracking link when there is one."
+            },
+            "pdf_url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "share_url",
+            "pdf_url"
+          ],
+          "additionalProperties": false
+        },
+        "tracking": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "True on /r/ tracking links."
+            },
+            "notice": {
+              "type": "string",
+              "description": "Short tracking notice (required on /r/)."
+            }
+          },
+          "required": [
+            "enabled",
+            "notice"
+          ],
+          "additionalProperties": false
+        },
+        "texts": {
+          "type": "object",
+          "properties": {
+            "intro": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cta_title": {
+              "type": "string"
+            },
+            "cta_text": {
+              "type": "string"
+            },
+            "cta_label": {
+              "type": "string"
+            },
+            "footer": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "disclaimer": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "intro",
+            "cta_title",
+            "cta_text",
+            "cta_label",
+            "footer",
+            "disclaimer"
+          ],
+          "additionalProperties": false
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "enum": [
+                  "summary",
+                  "priorities",
+                  "cost",
+                  "axes",
+                  "ai",
+                  "issues",
+                  "passed",
+                  "cta"
+                ]
+              },
+              "label": {
+                "type": "string"
+              },
+              "enabled": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "label",
+              "enabled"
+            ],
+            "additionalProperties": false
+          },
+          "description": "Sections in display order, as configured in the template settings."
+        },
+        "settings": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "boolean",
+              "null"
+            ]
+          },
+          "description": "Values of the template settings declared in its manifest."
+        },
+        "template": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "version"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "contract",
+        "version",
+        "mode",
+        "generated_at",
+        "audit",
+        "score",
+        "counts",
+        "summary",
+        "priorities",
+        "quick_wins",
+        "cost",
+        "axes",
+        "top_issues",
+        "ai",
+        "passed",
+        "agency",
+        "links",
+        "tracking",
+        "texts",
+        "sections",
+        "settings",
+        "template"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
