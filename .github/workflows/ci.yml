@@ -93,7 +93,7 @@ jobs:
           docker compose config --quiet
           docker compose -f docker-compose.yml -f docker-compose.n8n.yml config --quiet
       - name: Build web
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: apps/web/Dockerfile
@@ -102,7 +102,7 @@ jobs:
           cache-from: type=gha,scope=web
           cache-to: type=gha,mode=max,scope=web
       - name: Build scanner
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: apps/scanner/Dockerfile
