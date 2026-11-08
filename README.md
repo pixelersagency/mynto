@@ -25,8 +25,6 @@ Licence [AGPL-3.0](LICENSE). Français d'abord, [English below](#english).
   <img src="docs/screenshots/dashboard-light.png" alt="Tableau de bord : liste des audits et fiche d'un site avec son score, le radar des axes et les problèmes prioritaires (données fictives)">
 </picture>
 
-<p align="center"><img src="docs/screenshots/rapport-demo.gif" alt="Démo : défilement d'un rapport au modèle Minimaliste, du score au plan d'action (données fictives)" width="720"></p>
-
 ![Les trois modèles de rapport fournis : Minimaliste, Bento et Style Mynto (données fictives)](docs/screenshots/templates.png)
 
 ## Sommaire
