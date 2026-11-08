@@ -32,7 +32,7 @@ Licence [AGPL-3.0](LICENSE). Français d'abord, [English below](#english).
 - **Module Préparation IA** (optionnel) : 24 tests déterministes (robots IA, llms.txt, version Markdown, protocoles MCP et agents, commerce agentique), score à part sur 100. Voir [docs/modules/ai-readiness.md](docs/modules/ai-readiness.md).
 - **Rédaction par IA** (optionnelle) : Claude par défaut, Gemini ou Mistral. Sans clé, le rapport garde une synthèse déterministe, sans aucun appel externe.
 - **Tableau de bord** : accueil « à faire », liste des audits, fiche audit, historique des scores, Analytics, recherche et commandes (⌘K).
-- **Liens de suivi** `/r/<jeton>` : tu sais si le prospect a ouvert le rapport, rien de plus (pas de cookie, IP jamais stockée).
+- **Liens de suivi** `/r/<jeton>` : tu sais si le prospect a ouvert le rapport, rien de plus (pas de cookie, IP jamais conservée en clair).
 - **Modèles de rapport** : trois modèles fournis (Standard, Compact, Commercial), les tiens en Liquid, polices servies localement, rapport web et PDF identiques. Voir [docs/templates/README.md](docs/templates/README.md).
 - **Envoi par email** via ton propre serveur SMTP.
 - **API REST v1** et **serveur MCP** (Claude Desktop, Claude Code, tout client MCP). Voir [docs/mcp.md](docs/mcp.md).
