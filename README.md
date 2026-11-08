@@ -69,7 +69,7 @@ Le score mesure des points vérifiables automatiquement. **Il ne vaut pas audit 
 ## Prérequis
 
 - Une machine Linux avec **Docker 24+** et **Docker Compose v2** (ou Docker Desktop).
-- **2 vCPU et 4 Go de RAM minimum** (voir [Dimensionnement](#dimensionnement)), 10 Go de disque.
+- **1 vCPU et 2 Go de RAM minimum**, 2 vCPU et 4 Go pour être à l'aise (voir [Dimensionnement](#dimensionnement)), 10 Go de disque.
 - Un nom de domaine et un reverse proxy pour le HTTPS en production.
 - Optionnel : Node 22 et pnpm 9 pour `pnpm run setup` (sinon, une commande Docker fait la même chose).
 
@@ -233,13 +233,13 @@ Redis ne contient que des files de travail : inutile de le sauvegarder.
 
 ## Dimensionnement
 
-Un audit lance jusqu'à quatre Chromium (rendu, capture, axe-core, Lighthouse), de 400 à 600 Mo chacun. Le worker traite deux audits en parallèle.
+Mesuré sur une instance en production (novembre 2026) : au repos, l'ensemble (web, scanner, Postgres, Redis) occupe environ 430 Mo de RAM. Pendant un audit, le scanner monte à 1,35 Go (Chromium, axe-core, Lighthouse) et l'instance à environ 1,5 Go, avec un peu plus d'un cœur processeur occupé pendant l'analyse. Le scanner traite jusqu'à deux audits en parallèle : deux audits lancés en même temps demandent donc plus de mémoire.
 
 | Usage | Machine |
 |---|---|
-| Essai, quelques audits par jour | 2 vCPU, 4 Go de RAM |
-| Agence, des dizaines d'audits par jour | 4 vCPU, 8 Go de RAM |
-| Plus | plusieurs scanners (`docker compose up -d --scale scanner=2`), 8 Go chacun |
+| Un audit à la fois | 1 vCPU, 2 Go de RAM |
+| Audits en parallèle, usage quotidien d'agence | 2 vCPU, 4 Go de RAM |
+| Plus | plusieurs scanners (`docker compose up -d --scale scanner=2`), 2 Go de plus chacun |
 
 Sur une petite machine, coupe les collecteurs lourds : `AUDIT_RUN_LIGHTHOUSE=0`, `AUDIT_RUN_AXE=0` (les règles qui en dépendent apparaissent « non exécutées »).
 
@@ -310,7 +310,7 @@ mynto is a self-hosted website audit tool for agencies. Run an audit, get an 8-a
 
 ### Quick start
 
-Requirements: Docker 24+ with Compose v2, 2 vCPU / 4 GB RAM minimum.
+Requirements: Docker 24+ with Compose v2, 1 vCPU / 2 GB RAM minimum (2 vCPU / 4 GB for parallel audits).
 
 ```bash
 git clone https://github.com/pixelersagency/mynto.git && cd mynto
