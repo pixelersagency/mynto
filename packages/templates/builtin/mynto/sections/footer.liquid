@@ -4,7 +4,7 @@
   {% if tracking.enabled %}
   <div class="mr-privacy" id="confidentialite">
     <h2 class="mr-privacy__title">Confidentialité</h2>
-    <p>Ce lien t’a été envoyé par {{ agency.name }}. Quand la page reste affichée quelques secondes, ton navigateur envoie un seul signal : « ce lien a été ouvert ». Pas de cookie, rien d’enregistré dans ton navigateur, pas de mesure du temps de lecture. Côté serveur, on garde la date d’ouverture et le type de navigateur. Ton adresse IP n’est jamais stockée.</p>
+    <p>Ce lien t’a été envoyé par {{ agency.name }}. Quand la page reste affichée quelques secondes, ton navigateur envoie un seul signal : « ce lien a été ouvert ». Pas de cookie, rien d’enregistré dans ton navigateur, pas de mesure du temps de lecture. Côté serveur, on garde la date d’ouverture et le type de navigateur. Ton adresse IP n’est pas conservée en clair : seule une empreinte irréversible, effacée automatiquement, sert à ne compter qu’une ouverture par visiteur.</p>
   </div>
   {% endif %}
 </footer>

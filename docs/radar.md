@@ -10,7 +10,7 @@ Le lien répond à une seule question : « a-t-il été ouvert ? ». C'est le mi
 
 - La page `/r/<token>` envoie **un seul** signal (`POST /api/radar/view`, corps `{ "token": "..." }`) après environ 5 secondes d'onglet visible. Rien n'est envoyé si l'onglet reste en arrière-plan, ni avec `?preview=1`, ni quand l'admin connecté ouvre son propre lien.
 - Aucun cookie, aucun `sessionStorage` / `localStorage`, aucun identifiant de session, pas de temps de lecture, pas de sections lues.
-- Côté serveur : on stocke la date d'ouverture et une famille de navigateur grossière (« Chrome, mobile », 200 caractères max). L'IP n'est jamais stockée : seule une empreinte HMAC (`AUDIT_VIEWS_IP_HASH_SECRET`, ou un secret aléatoire par processus) sert à dédoublonner les ouvertures d'un même visiteur sur 30 minutes. Pas de pays.
+- Côté serveur : on stocke la date d'ouverture et une famille de navigateur grossière (« Chrome, mobile », 200 caractères max). L'IP n'est jamais stockée en clair : seule une empreinte HMAC (`AUDIT_VIEWS_IP_HASH_SECRET`, ou un secret aléatoire par processus) sert à dédoublonner les ouvertures d'un même visiteur sur 30 minutes. Pas de pays.
 - La page affiche une mention visible (« … sait si tu as ouvert ce rapport, rien de plus ») et une section « Confidentialité » en pied de page.
 - Les robots, scanners de messagerie et clients sans navigateur sont filtrés (`apps/scanner/src/lib/radar/ua-filter.ts`).
 
