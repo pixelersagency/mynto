@@ -13,9 +13,10 @@ Première version publique.
 - Audit de site sur 8 axes : SEO technique, SEO contenu, performance (Lighthouse), accessibilité (axe-core), conformité légale, conversion, UX, UI. Score global et par axe sur 100, problèmes classés par priorité, chiffrage indicatif du temps de correction.
 - Module optionnel Préparation IA : 24 tests déterministes (robots IA, llms.txt, Markdown, protocoles MCP et agents, commerce agentique), score à part, types de site.
 - Rédaction par IA optionnelle (Claude par défaut, Gemini, Mistral), avec repli déterministe sans clé.
-- Tableau de bord d'agence : accueil, liste et fiche des audits, historique des scores, Analytics, palette de commandes, réglages (marque, IA, SMTP, modèles, polices, modules, webhooks, clés API).
-- Liens de suivi `/r/<jeton>` sans cookie ni IP stockée.
-- Modèles de rapport en Liquid (Standard, Compact, Commercial), rapport web et PDF identiques, polices servies localement.
+- Tableau de bord d'agence au style Minimaliste (clair et sombre) : accueil, liste et fiche des audits, historique des scores, Analytics, palette de commandes, réglages (marque, favicon, IA, SMTP, modèles, polices, modules, webhooks, clés API).
+- Liens de suivi `/r/<jeton>` sans cookie ; l'IP n'est jamais conservée en clair (empreinte HMAC purgée automatiquement).
+- Trois modèles de rapport en Liquid : Minimaliste (par défaut), Bento et Style Mynto, plus les tiens. Rapport web et PDF identiques, polices servies localement.
+- Favicon de l'agence (PNG, SVG ou ICO), par défaut son logo, sur le tableau de bord et les rapports.
 - Envoi des rapports par email via ton serveur SMTP.
 - API REST v1 (OpenAPI), serveur MCP (HTTP et stdio).
 - Webhooks sortants signés (HMAC), 10 événements, nouvelles tentatives, journal des livraisons.
