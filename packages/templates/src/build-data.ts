@@ -309,7 +309,10 @@ export function buildReportData(input: {
     };
   });
 
-  const ce = audit.cost_estimate ?? null;
+  // The "cost" section switch hides every price, not only the section itself:
+  // several templates also repeat the estimate in their hero.
+  const costSectionOn = !template.sections.some((s) => s.id === 'cost' && !s.enabled);
+  const ce = costSectionOn ? (audit.cost_estimate ?? null) : null;
   const rem = audit.remediation ?? null;
   const cost: ReportDataV1['cost'] =
     ce === null || ce.totalMinutes <= 0
