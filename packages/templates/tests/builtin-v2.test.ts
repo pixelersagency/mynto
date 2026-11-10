@@ -276,3 +276,22 @@ describe('retired built-in ids', () => {
     expect(html).toContain('Prendre rendez-vous');
   });
 });
+
+describe('cost section switch', () => {
+  it.each([...BUILTIN_TEMPLATE_IDS])(
+    '%s shows no price anywhere once the cost section is off',
+    async (id) => {
+      const on = await render(id, dataWith(id, {}));
+      expect(on).toContain('€');
+      const defaults = resolveSettings(bundle(id).manifest, null).sections;
+      const stored = {
+        sections: defaults.map((s) => (s.id === 'cost' ? { ...s, enabled: false } : s)),
+      };
+      const data = dataWith(id, {}, EXAMPLE_FINDINGS, { stored });
+      expect(data.cost).toBeNull();
+      const off = await render(id, data);
+      expect(off).not.toContain('€ HT');
+      expect(off).not.toContain('Corriger l’essentiel');
+    },
+  );
+});
